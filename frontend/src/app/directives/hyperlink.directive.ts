@@ -1,10 +1,16 @@
-import { Directive } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
+import { HyperlinkService } from '../services/hyperlink.service';
 
 @Directive({
-  selector: '[appHyperlink]'
+	selector: '[appHyperlink]'
 })
 export class HyperlinkDirective {
 
-  constructor() { }
+	constructor(el: ElementRef, hyperlinkService: HyperlinkService) { }
+
+	@HostListener('mousedown')
+	selectLink() {
+		this.hyperlinkService
+	}
 
 }

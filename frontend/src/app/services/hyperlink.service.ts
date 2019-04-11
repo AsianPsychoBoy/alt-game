@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class HyperlinkService {
 
-  constructor() { }
+	linkedWords: string[];
 
+	constructor() { }
+
+	addWord(w: string) {
+	}
 }
