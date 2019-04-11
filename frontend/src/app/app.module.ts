@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { HyperlinkDirective } from './directives/hyperlink.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HyperlinkDirective
   ],
   imports: [
     BrowserModule,
