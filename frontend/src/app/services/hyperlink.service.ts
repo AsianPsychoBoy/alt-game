@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Word } from 'app/common/Word';
 
+import { BehaviorSubject } from 'rxjs';
+
 @Injectable()
 export class HyperlinkService {
 
   wordCount = 0
 
-  linkedWords: Word[] = [];
-
-  isLinking: boolean;
+  wordList: Word[] = [];
 
   constructor() { }
 
@@ -16,16 +16,19 @@ export class HyperlinkService {
     return ++this.wordCount;
   }
 
-	addWord(w: Word) {
-    this.isLinking = true;
-    this.linkedWords.push(w);
-    console.log('yah', this.linkedWords)
+	toggleWord(word: Word) {
+    const index = this.wordList.findIndex((w) => w.id === word.id);
+    if (index < 0) {
+      this.wordList.push(word);
+    } else {
+      this.wordList.splice(index, 1);
+    }
   }
 
-  clearWords() {
-    this.isLinking = false;
-    this.linkedWords = [];
-    console.log('yeet', this.linkedWords)
-  }
+  // clearWords() {
+  //   this.isLinking.next(false);
+  //   this.linkedWords = [];
+  //   console.log('yeet', this.linkedWords)
+  // }
 
 }

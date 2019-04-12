@@ -1,0 +1,35 @@
+.control-panel-container {
+  position: fixed;
+  bottom: 0;
+  height: 35vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .control-panel {
+    width: 760px;
+    height: 100%;
+    border: 2px solid black;
+    font-family: 'Source Code Pro', monospace;
+    .command {
+      height: 72px;
+      border-bottom: 2px solid black;
+      padding: 8px;
+      .command-caret {
+        font-size: 2.25rem;
+      }
+    }
+    .word-basket {
+      margin: 0;
+      padding-top: 16px;
+      .word {
+        text-align: center;
+        font-size: 1.25rem;
+        padding: 8px;
+      }
+      .selected {
+        color: white;
+        background-color: black;
+      }
+    }
+  }
+}

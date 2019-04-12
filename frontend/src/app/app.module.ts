@@ -7,11 +7,14 @@ import { AppComponent } from './app.component';
 import { HyperlinkDirective } from './directives/hyperlink.directive';
 
 import { HyperlinkService } from './services/hyperlink.service';
+import { GameProgressionService } from './services/game-progression.service';
+import { WordBasketComponent } from './components/word-basket/word-basket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HyperlinkDirective
+    HyperlinkDirective,
+    WordBasketComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,8 @@ import { HyperlinkService } from './services/hyperlink.service';
     HttpModule
   ],
   providers: [
-    HyperlinkService
+    HyperlinkService,
+    GameProgressionService
   ],
   bootstrap: [AppComponent]
 })
