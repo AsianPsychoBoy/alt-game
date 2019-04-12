@@ -1,12 +1,31 @@
 import { Injectable } from '@angular/core';
+import { Word } from 'app/common/Word';
 
 @Injectable()
 export class HyperlinkService {
 
-	linkedWords: string[];
+  wordCount = 0
 
-	constructor() { }
+  linkedWords: Word[] = [];
 
-	addWord(w: string) {
-	}
+  isLinking: boolean;
+
+  constructor() { }
+
+  newWordId(): number {
+    return ++this.wordCount;
+  }
+
+	addWord(w: Word) {
+    this.isLinking = true;
+    this.linkedWords.push(w);
+    console.log('yah', this.linkedWords)
+  }
+
+  clearWords() {
+    this.isLinking = false;
+    this.linkedWords = [];
+    console.log('yeet', this.linkedWords)
+  }
+
 }

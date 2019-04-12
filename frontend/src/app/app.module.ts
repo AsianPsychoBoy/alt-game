@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HyperlinkDirective } from './directives/hyperlink.directive';
 
+import { HyperlinkService } from './services/hyperlink.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,9 @@ import { HyperlinkDirective } from './directives/hyperlink.directive';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    HyperlinkService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
