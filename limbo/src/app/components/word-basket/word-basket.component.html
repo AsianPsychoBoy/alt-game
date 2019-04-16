@@ -1,6 +1,6 @@
 <div class="control-panel-container">
   <div class="control-panel">
-    <div class="command d-flex">
+    <div class="command d-flex" [ngClass]="{'error': commandIndicator === 1, 'success': commandIndicator === 2}">
         <div class="">
           <div class="command-caret">></div>
         </div>

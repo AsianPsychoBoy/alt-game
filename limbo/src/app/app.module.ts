@@ -7,12 +7,14 @@ import { HyperlinkDirective } from './directives/hyperlink.directive';
 import { HyperlinkService } from './services/hyperlink.service';
 import { GameProgressionService } from './services/game-progression.service';
 import { WordBasketComponent } from './components/word-basket/word-basket.component';
+import { TextInterfaceComponent } from './components/text-interface/text-interface.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HyperlinkDirective,
-    WordBasketComponent
+    WordBasketComponent,
+    TextInterfaceComponent
   ],
   imports: [
     BrowserModule

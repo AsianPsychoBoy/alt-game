@@ -12,6 +12,8 @@ export class WordBasketComponent implements OnInit {
 
   commandList: Word[] = [];
 
+  commandIndicator = 0;
+
   constructor(public hyperlinkService: HyperlinkService, private gameService: GameProgressionService) { }
 
   ngOnInit() {
@@ -30,8 +32,23 @@ export class WordBasketComponent implements OnInit {
     return this.commandList.find((w) => w.id === word.id);
   }
 
-  @HostListener('keydown.enter')
+  @HostListener('document:keyup.enter')
   runCommand() {
-    this.gameService.checkCombination(this.commandList);
+    if (this.commandList.length > 0) {
+      this.gameService.checkCombination(this.commandList).subscribe(
+        success => {
+          if (success) {
+            this.commandIndicator = 2;
+            setTimeout(() => {
+              this.commandList = [];
+              this.commandIndicator = 0
+            }, 600);
+          } else {
+            this.commandIndicator = 1;
+            setTimeout(() => this.commandIndicator = 0, 600);
+          }
+        }
+      );
+    }
   }
 }
