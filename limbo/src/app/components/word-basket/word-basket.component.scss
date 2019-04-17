@@ -26,7 +26,8 @@
     }
     .word-basket {
       margin: 0;
-      padding-top: 16px;
+	  padding-top: 16px;
+	  overflow: scroll;
       .word {
         text-align: center;
         font-size: 1.25rem;

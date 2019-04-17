@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class GameProgressionService {
 
-  currentLevel: number = 0;
+  currentLevel = -1;
 
   currentItems: [];
 
@@ -27,12 +27,33 @@ export class GameProgressionService {
       }
       subscriber.next(false);
       subscriber.complete();
-    })
+    });
+  }
+
+  gotoLevel(n: number): Observable<boolean> {
+	return new Observable((subscriber) => {
+		const level = levels.find(lvl => lvl.number === n);
+		if (level && level.requirement.level === this.currentLevel) {
+			this.currentLevel = level.number;
+			subscriber.next(true);
+			subscriber.complete();
+		} else {
+			subscriber.next(false);
+			subscriber.complete();
+		}
+	});
   }
 
 }
 
 const levels = [
+  {
+    number: 0,
+    requirement: {
+		level: -1,
+      items: []
+    }
+  },
   {
     number: 1,
     requirement: {
@@ -40,5 +61,13 @@ const levels = [
       command: [2, 3],
       items: []
     }
+  },
+  {
+    number: 2,
+    requirement: {
+      level: 1,
+      command: [],
+      items: []
+    }
   }
-]
+];

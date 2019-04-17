@@ -22,9 +22,10 @@ h1, h2, h3, h4 {
 
 .linkableWord {
   font-weight: 800;
+  border-bottom: 2px dotted #999;
   cursor: pointer;
 }
 
 .linkedWord {
-  border-bottom: 2px dotted #999;
+  
 }

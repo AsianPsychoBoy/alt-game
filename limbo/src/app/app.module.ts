@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HyperlinkDirective } from './directives/hyperlink.directive';
@@ -17,7 +18,8 @@ import { TextInterfaceComponent } from './components/text-interface/text-interfa
     TextInterfaceComponent
   ],
   imports: [
-    BrowserModule
+	BrowserModule,
+	AppRoutingModule
   ],
   providers: [
     HyperlinkService,

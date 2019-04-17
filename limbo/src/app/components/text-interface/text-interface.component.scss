@@ -1,3 +1,19 @@
 .text-container {
-  max-height: 60vh;
+  max-height: 65vh;
+  overflow: scroll;
+}
+
+.next-button {
+	position: relative;
+	top: 0;
+	display: block;
+	border-radius: 0;
+	border: 2px solid black;
+	box-shadow: 0 6px 0 black;
+	margin-bottom: 20px;
+	transition: none;
+	&:active {
+		top: 6px;
+		box-shadow: 0 0 0 black;
+	}
 }
