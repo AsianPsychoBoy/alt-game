@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 export class GameProgressionService {
 
   currentLevel = 0;
+  currentLevelIndex = 0;
 
   currentItems: [];
 
@@ -14,13 +15,15 @@ export class GameProgressionService {
   checkCombination(wordCommand: Word[]): Observable<boolean> {
     return new Observable((subscriber) => {
       const command = wordCommand.map(word => word.id);
-      for (let i = 0; i < levels.length; i ++) {
+      for (let i = this.currentLevelIndex; i < levels.length; i ++) {
         if (
           levels[i].requirement.level === this.currentLevel &&
           levels[i].requirement.command.every((id, index) => id === command[index])
           // Do the items checking
         ) {
           this.currentLevel = levels[i].number;
+          this.currentLevelIndex = i;
+          levels[i].unlocked = true;
           subscriber.next(true);
           subscriber.complete();
         }
@@ -32,9 +35,12 @@ export class GameProgressionService {
 
   gotoLevel(n: number): Observable<boolean> {
     return new Observable((subscriber) => {
-      const level = levels.find(lvl => lvl.number === n);
-      if (level && level.requirement.level === (this.currentLevel - this.currentLevel % 1)) {
-        this.currentLevel = level.number;
+      const levelIndex = levels.findIndex(lvl => lvl.number === n);
+      if (levelIndex >= 0 && levels[levelIndex].requirement.level === (this.currentLevel - this.currentLevel % 1)) {
+        this.currentLevel = levels[levelIndex].number;
+        this.currentLevelIndex = levelIndex;
+        levels[levelIndex].unlocked = true;
+        console.log('goto', levelIndex, n, this.currentLevel)
         subscriber.next(true);
         subscriber.complete();
       } else {
@@ -44,11 +50,16 @@ export class GameProgressionService {
     });
   }
 
+  isUnlocked(n: number) {
+    return levels.find(lvl => lvl.number === n).unlocked;
+  }
+
 }
 
 const levels = [
   {
     number: 1,
+    unlocked: false,
     requirement: {
 		  level: 0,
       items: []
@@ -56,6 +67,7 @@ const levels = [
   },
   {
     number: 1.1,
+    unlocked: false,
     requirement: {
       level: 1,
       command: [2, 3],
@@ -64,6 +76,7 @@ const levels = [
   },
   {
     number: 2,
+    unlocked: false,
     requirement: {
       level: 1,
       command: [],
@@ -72,6 +85,7 @@ const levels = [
   },
   {
     number: 2.1,
+    unlocked: false,
     requirement: {
       level: 2,
       command: [6, 5],
@@ -80,6 +94,7 @@ const levels = [
   },
   {
     number: 2.2,
+    unlocked: false,
     requirement: {
       level: 2,
       command: [2, 4],
@@ -88,6 +103,7 @@ const levels = [
   },
   {
     number: 2.3,
+    unlocked: false,
     requirement: {
       level: 2,
       command: [2, 4],
