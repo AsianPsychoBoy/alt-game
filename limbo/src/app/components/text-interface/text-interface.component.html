@@ -1,6 +1,6 @@
 <div class="text-container">
-	<ng-container *ngIf="gps.currentLevel === -1">
-	
+	<ng-container *ngIf="gps.currentLevel < 1">
+
 		<h1 class="display-3">
 			The Gates of Limbo
 		</h1>
@@ -14,10 +14,10 @@
 			The Anatomy of Melancholy, part 2, sect. II, mem. IV
 		</p>
 
-		<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(0)">continue</button>
+		<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(1)">continue</button>
 	</ng-container>
 
-	<ng-container *ngIf="gps.currentLevel === 0">
+	<ng-container *ngIf="gps.currentLevel >= 1 && gps.currentLevel < 2">
 
 		<span class="lead">2018/3/15 Chicago</span>
 		<p>
@@ -26,7 +26,7 @@
 
 	</ng-container>
 
-	<ng-container *ngIf="gps.currentLevel === 1">
+	<ng-container *ngIf="gps.currentLevel === 1.1">
 		<p>
 			Nothing new in the building today: a pale woman with a fleshy 3-degree burn on her arm (gave her more morphine), a kid on a squeaky wheelchair with a concussion (handed him a lollipop), and an old man with a recurring hip problem (helped him walk around for a little bit).
 		</p>
@@ -34,17 +34,19 @@
 		<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(2)">continue</button>
 	</ng-container>
 
-	<ng-container *ngIf="gps.currentLevel === 2">
+	<ng-container *ngIf="gps.currentLevel >= 2 && gps.currentLevel < 3">
 		<span class="lead">2018/3/15 Chicago</span>
 		<p>
 			Truth to be told I've been wanting to get rid of this note book for sometime now. The more time I spend on it, jotting down events at the ward, pieces of thoughts when I eat lunch or the patients I treated, the more I feel nervous that this very act of self-reflection would lead to the discovery, half-expected at this point, that there is something deeply wrong with me. Could be this habit of aimless note taking, or could be the cold in my bones. Right now there is a weak, yet precious balance in my routines, and I don't want to introduce any change to the system.
 		</p>
 		<p>
-			In the morning, I did a routine checkup on the burn patient, which led me to believe that today is just another day I would put away to the back of my head and another page that would get buried by a thousand other identical pages, until I walked into the room of Alan Bennet. 5'11", male, 18 years old, white, blood type AB, half Asian, half White, probably a smart kid, probably good at math, probably aspire to be an electrical engineer, probably has a girlfriend that his parents don't know about…I let myself dream a little bit, constructing, in my mind, a happy teenager that I missed being, until reality pulled my eyes back to the document, and I realized all of those things I listed about him he has ceased to be, because the three words "persistent vegetative state" had ripped away everything that made him who he is. Despite my hands shivering with the onset of coldness from my bones spreading outward, I laid my eyes on the him, or what remains of him: _______________________. 
+      In the morning, I did a routine checkup on the burn patient, which led me to believe that today is just another day I would put away to the back of my head and another page that would get buried by a thousand other identical pages, until I walked into the <span appHyperlink>room</span> of <span appHyperlink>Alan Bennet</span>. 5'11", male, 18 years old, blood type AB, half Asian, half White, probably a smart kid, probably good at math, probably aspire to be an electrical engineer, probably sneaks out of his housea at night with his friends…I let myself dream a little bit, constructing, in my mind, a happy teenager that I missed being, until reality pulled my <span appHyperlink>eyes</span> back to the document, and I realized all of those things I listed about him he has ceased to be, because the three words "persistent vegetative state" had ripped away everything that made him who he is.
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="gps.currentLevel === 2.1">
+    <p>
+      Despite my hands shivering with the onset of coldness from my bones spreading outward, I laid my eyes on the him, or what remains of him: _______________________.
 		</p>
-	</ng-container>
-
-	<ng-container *ngIf="gps.currentLevel === 3">
-
 	</ng-container>
 </div>

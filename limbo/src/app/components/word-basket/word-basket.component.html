@@ -18,7 +18,7 @@
       <div class="col-sm-4 d-flex justify-content-center align-items-center"
         *ngFor="let word of hyperlinkService.wordList"
         (click)="toggleWord(word)">
-        <div class="word" [class.selected]="checkSelected(word)">{{word.string}}</div>
+        <div class="word" [class.selected]="checkSelected(word)">{{word.string}} ({{word.id}})</div>
       </div>
     </div>
   </div>
