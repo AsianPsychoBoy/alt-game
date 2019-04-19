@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class HyperlinkService {
 
-  wordCount = 0
+  wordCount = 0;
 
   wordList: Word[] = [];
 

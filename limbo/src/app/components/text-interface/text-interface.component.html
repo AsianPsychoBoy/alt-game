@@ -1,4 +1,5 @@
 <div class="text-container" [ngSwitch]="gps.currentLevel - gps.currentLevel % 1">
+	<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(gps.currentLevel + 1)">continue</button>
 	<ng-container *ngSwitchCase="0">
 
 		<h1 class="display-3">
@@ -42,16 +43,22 @@
       In the morning, I did a routine checkup on the burn patient, which led me to believe that today is just another day I would put away to the back of my head and another page that would get buried by a thousand other identical pages, until I walked into the <span appHyperlink>room</span> of <span appHyperlink>Alan Bennet</span>. 5'11", male, 18 years old, blood type AB, half Asian, half White, probably a smart kid, probably good at math, probably aspire to be an electrical engineer, probably sneaks out of his housea at night with his friends…I let myself dream a little bit, constructing, in my mind, a happy teenager that I missed being, until reality pulled my <span appHyperlink>eyes</span> back to the document, and I realized all of those things I listed about him he has ceased to be, because the three words "persistent vegetative state" had ripped away everything that made him who he is.
     </p>
 
+    <ng-container *ngIf="gps.isUnlocked(2.2)">
+      <p>
+        Apart from me and Alan, the room is also inabited by a living, pulsing silence.
+      </p>
+	</ng-container>
+	
     <ng-container *ngIf="gps.isUnlocked(2.1)">
-      <p>
-        Despite my hands shivering with the onset of coldness from my bones spreading outward, I laid my eyes on the him, or what remains of him: _______________________.
-      </p>
-    </ng-container>
+		<p>
+			Despite my hands shivering with the onset of coldness from my bones spreading outward, I laid my eyes on the him, or what remains of him: _______________________.
+		</p>
+	
+		<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(3)">continue</button>
+	</ng-container>
+  </ng-container>
 
-    <ng-container *ngIf="2.2">
-      <p>
-        The room is inabited by a living, pulsing silence.
-      </p>
-    </ng-container>
+  <ng-container *ngSwitchCase="3">
+	  
   </ng-container>
 </div>

@@ -41,11 +41,12 @@ export class WordBasketComponent implements OnInit {
             this.commandIndicator = 2;
             setTimeout(() => {
               this.commandList = [];
-              this.commandIndicator = 0
+              this.commandIndicator = 0;
             }, 600);
           } else {
-            this.commandIndicator = 1;
-            setTimeout(() => this.commandIndicator = 0, 600);
+			this.commandList = [];
+   this.commandIndicator = 1;
+   setTimeout(() => this.commandIndicator = 0, 600);
           }
         }
       );

@@ -15,9 +15,9 @@ export class GameProgressionService {
   checkCombination(wordCommand: Word[]): Observable<boolean> {
     return new Observable((subscriber) => {
       const command = wordCommand.map(word => word.id);
-      for (let i = this.currentLevelIndex; i < levels.length; i ++) {
+      for (let i = 0; i < levels.length; i ++) {
         if (
-          levels[i].requirement.level === this.currentLevel &&
+          levels[i].requirement.level === (this.currentLevel - this.currentLevel % 1) &&
           levels[i].requirement.command.every((id, index) => id === command[index])
           // Do the items checking
         ) {
@@ -40,7 +40,7 @@ export class GameProgressionService {
         this.currentLevel = levels[levelIndex].number;
         this.currentLevelIndex = levelIndex;
         levels[levelIndex].unlocked = true;
-        console.log('goto', levelIndex, n, this.currentLevel)
+        console.log('goto', levelIndex, n, this.currentLevel);
         subscriber.next(true);
         subscriber.complete();
       } else {
@@ -51,7 +51,7 @@ export class GameProgressionService {
   }
 
   isUnlocked(n: number) {
-    return levels.find(lvl => lvl.number === n).unlocked;
+	return !!levels.find(lvl => lvl.number === n && lvl.unlocked);
   }
 
 }
@@ -88,7 +88,7 @@ const levels = [
     unlocked: false,
     requirement: {
       level: 2,
-      command: [6, 5],
+      command: [6, 5], // eyes alan
       items: []
     }
   },
@@ -97,16 +97,16 @@ const levels = [
     unlocked: false,
     requirement: {
       level: 2,
-      command: [2, 4],
+      command: [2, 4], // inside room
       items: []
     }
   },
   {
-    number: 2.3,
+    number: 2.2,
     unlocked: false,
     requirement: {
       level: 2,
-      command: [2, 4],
+      command: [6, 4], // eyes room
       items: []
     }
   }
