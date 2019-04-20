@@ -9,13 +9,15 @@ import { HyperlinkService } from './services/hyperlink.service';
 import { GameProgressionService } from './services/game-progression.service';
 import { WordBasketComponent } from './components/word-basket/word-basket.component';
 import { TextInterfaceComponent } from './components/text-interface/text-interface.component';
+import { SanityBarComponent } from './components/sanity-bar/sanity-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HyperlinkDirective,
     WordBasketComponent,
-    TextInterfaceComponent
+    TextInterfaceComponent,
+    SanityBarComponent
   ],
   imports: [
 	BrowserModule,

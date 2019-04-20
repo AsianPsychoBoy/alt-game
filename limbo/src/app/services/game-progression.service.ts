@@ -8,6 +8,8 @@ export class GameProgressionService {
   currentLevel = 0;
   currentLevelIndex = 0;
 
+  sanityScore = 100;
+
   currentItems: [];
 
   constructor() { }
@@ -18,16 +20,19 @@ export class GameProgressionService {
       for (let i = 0; i < levels.length; i ++) {
         if (
           levels[i].requirement.level === (this.currentLevel - this.currentLevel % 1) &&
+          levels[i].requirement.command.length > 0 &&
           levels[i].requirement.command.every((id, index) => id === command[index])
           // Do the items checking
         ) {
           this.currentLevel = levels[i].number;
           this.currentLevelIndex = i;
           levels[i].unlocked = true;
+          console.log('command navigate: ', levels[i].number);
           subscriber.next(true);
           subscriber.complete();
         }
       }
+      this.sanityScore -= 5;
       subscriber.next(false);
       subscriber.complete();
     });
@@ -57,6 +62,14 @@ export class GameProgressionService {
 }
 
 const levels = [
+  {
+    number: 0.1,
+    unlocked: false,
+    requirement: {
+      level: 0,
+      command: [],
+      items: []
+    }},
   {
     number: 1,
     unlocked: false,
@@ -88,7 +101,16 @@ const levels = [
     unlocked: false,
     requirement: {
       level: 2,
-      command: [6, 5], // eyes alan
+      command: [7, 5], // eyes alan
+      items: []
+    }
+  },
+  {
+    number: 2.11,
+    unlocked: false,
+    requirement: {
+      level: 2,
+      command: [],
       items: []
     }
   },
@@ -97,7 +119,7 @@ const levels = [
     unlocked: false,
     requirement: {
       level: 2,
-      command: [2, 4], // inside room
+      command: [2, 5], // inside room
       items: []
     }
   },
@@ -106,7 +128,16 @@ const levels = [
     unlocked: false,
     requirement: {
       level: 2,
-      command: [6, 4], // eyes room
+      command: [7, 5], // eyes room
+      items: []
+    }
+  },
+  {
+    number: 2.3,
+    unlocked: false,
+    requirement: {
+      level: 2,
+      command: [4, 8], // walked room
       items: []
     }
   }
