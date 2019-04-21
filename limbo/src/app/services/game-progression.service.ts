@@ -17,6 +17,7 @@ export class GameProgressionService {
   checkCombination(wordCommand: Word[]): Observable<boolean> {
     return new Observable((subscriber) => {
       const command = wordCommand.map(word => word.id);
+      let matched = false;
       for (let i = 0; i < levels.length; i ++) {
         if (
           levels[i].requirement.level === (this.currentLevel - this.currentLevel % 1) &&
@@ -26,15 +27,21 @@ export class GameProgressionService {
         ) {
           this.currentLevel = levels[i].number;
           this.currentLevelIndex = i;
-          levels[i].unlocked = true;
+          levels[i].unlocked++;
           console.log('command navigate: ', levels[i].number);
-          subscriber.next(true);
-          subscriber.complete();
+          matched = true;
+          break;
         }
       }
-      this.sanityScore -= 5;
-      subscriber.next(false);
-      subscriber.complete();
+
+      if (matched) {
+        subscriber.next(true);
+        subscriber.complete();
+      } else {
+        this.sanityScore -= 5;
+        subscriber.next(false);
+        subscriber.complete();
+      }
     });
   }
 
@@ -44,7 +51,7 @@ export class GameProgressionService {
       if (levelIndex >= 0 && levels[levelIndex].requirement.level === (this.currentLevel - this.currentLevel % 1)) {
         this.currentLevel = levels[levelIndex].number;
         this.currentLevelIndex = levelIndex;
-        levels[levelIndex].unlocked = true;
+        levels[levelIndex].unlocked++;
         console.log('goto', levelIndex, n, this.currentLevel);
         subscriber.next(true);
         subscriber.complete();
@@ -55,8 +62,9 @@ export class GameProgressionService {
     });
   }
 
-  isUnlocked(n: number) {
-	return !!levels.find(lvl => lvl.number === n && lvl.unlocked);
+  isUnlocked(n: number): number {
+    const unlockedLevel = levels.find(lvl => lvl.number === n && lvl.unlocked !== 0);
+	  return unlockedLevel ? unlockedLevel.unlocked : 0;
   }
 
 }
@@ -64,7 +72,7 @@ export class GameProgressionService {
 const levels = [
   {
     number: 0.1,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 0,
       command: [],
@@ -72,7 +80,7 @@ const levels = [
     }},
   {
     number: 1,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
 		  level: 0,
       items: []
@@ -80,7 +88,7 @@ const levels = [
   },
   {
     number: 1.1,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 1,
       command: [2, 3],
@@ -89,7 +97,7 @@ const levels = [
   },
   {
     number: 2,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 1,
       command: [],
@@ -98,16 +106,16 @@ const levels = [
   },
   {
     number: 2.1,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 2,
-      command: [7, 5], // eyes alan
+      command: [7, 6], // eyes alan
       items: []
     }
   },
   {
     number: 2.11,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 2,
       command: [],
@@ -116,7 +124,7 @@ const levels = [
   },
   {
     number: 2.2,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 2,
       command: [2, 5], // inside room
@@ -125,7 +133,7 @@ const levels = [
   },
   {
     number: 2.2,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 2,
       command: [7, 5], // eyes room
@@ -134,11 +142,20 @@ const levels = [
   },
   {
     number: 2.3,
-    unlocked: false,
+    unlocked: 0,
     requirement: {
       level: 2,
       command: [4, 8], // walked room
       items: []
     }
-  }
+  },
+  {
+    number: 3,
+    unlocked: 0,
+    requirement: {
+      level: 2,
+      command: [],
+      items: []
+    }
+  },
 ];

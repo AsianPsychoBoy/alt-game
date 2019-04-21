@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { GameProgressionService } from 'src/app/services/game-progression.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TextInterfaceComponent implements OnInit {
 
-  constructor(private gps: GameProgressionService, private route: ActivatedRoute) { }
+  constructor(private gps: GameProgressionService, private route: ActivatedRoute, private viewContainer: ViewContainerRef) { }
 
   ngOnInit() {
 	  this.route.params.subscribe(p => {

@@ -1,8 +1,17 @@
 .text-container {
   max-height: 65vh;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    width: 10px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar-track
+  {
+    background-color: #F5F5F5;
+  }
+  &::-webkit-scrollbar
+  {
+    width: 1px;
+    background-color: #F5F5F5;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #000000;
   }
 }
 
@@ -24,4 +33,47 @@
 .scary {
   background-color: black;
   color: white;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  transform-origin: center;
+  padding: 2rem;
+}
+
+.glitch {
+  filter:url("#glitch");
+}
+
+.black-link {
+  height: 1.75rem;
+  width: 6rem;
+  display: inline-block;
+  background-color: black;
+  vertical-align: bottom;
+  &:after {
+    content: '';
+    z-index: -1;
+    display: block;
+    position: relative;
+    height: 1.75rem;
+    width: 6rem;
+    top: -29px;
+    left: -1px;
+    background-color: rgb(25, 255, 23);
+  }
+  &:before {
+    content: '';
+    z-index: -1;
+    display: block;
+    position: relative;
+    height: 1.75rem;
+    width: 6rem;
+    top: 1px;
+    left: 1px;
+    background-color: rgb(241, 0, 255);
+  }
+  &:hover {
+// glitch animation
+  }
 }

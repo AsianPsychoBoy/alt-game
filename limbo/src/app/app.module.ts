@@ -10,6 +10,10 @@ import { GameProgressionService } from './services/game-progression.service';
 import { WordBasketComponent } from './components/word-basket/word-basket.component';
 import { TextInterfaceComponent } from './components/text-interface/text-interface.component';
 import { SanityBarComponent } from './components/sanity-bar/sanity-bar.component';
+import { TextPieceDirective } from './directives/text-piece.directive';
+import { CommonModule } from '@angular/common';
+import { AppendRootDirective } from './directives/append-root.directive';
+import { TextScreenComponent } from './components/text-interface/text-screen/text-screen.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +21,15 @@ import { SanityBarComponent } from './components/sanity-bar/sanity-bar.component
     HyperlinkDirective,
     WordBasketComponent,
     TextInterfaceComponent,
-    SanityBarComponent
+    SanityBarComponent,
+    TextPieceDirective,
+    AppendRootDirective,
+    TextScreenComponent
   ],
   imports: [
-	BrowserModule,
-	AppRoutingModule
+    BrowserModule,
+    AppRoutingModule,
+    CommonModule
   ],
   providers: [
     HyperlinkService,
