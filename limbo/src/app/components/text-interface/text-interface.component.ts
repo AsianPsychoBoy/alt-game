@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TextInterfaceComponent implements OnInit {
 
-  constructor(private gps: GameProgressionService, private route: ActivatedRoute, private viewContainer: ViewContainerRef) { }
+  constructor(public gps: GameProgressionService, private route: ActivatedRoute, private viewContainer: ViewContainerRef) { }
 
   ngOnInit() {
 	  this.route.params.subscribe(p => {

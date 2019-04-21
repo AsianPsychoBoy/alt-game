@@ -8,7 +8,7 @@ import { GameProgressionService } from 'src/app/services/game-progression.servic
 })
 export class SanityBarComponent implements OnInit {
 
-  constructor(private gps: GameProgressionService) { }
+  constructor(public gps: GameProgressionService) { }
 
   ngOnInit() {
   }
