@@ -1,2 +1,4 @@
-<div class="sanity-bar-left" [style.width]="(100 - gps.sanityScore) / 5 + 'vw'"></div>
-<div class="sanity-bar-right" [style.width]="(100 - gps.sanityScore) / 5 + 'vw'"></div>
+<div class="health-bar-outline"></div>
+<div class="health-bar" [style.width]="sanityScore / 100 * 40 + 'rem'"></div>
+
+<div class="sanity-bar" [class.flash]="flash"></div>

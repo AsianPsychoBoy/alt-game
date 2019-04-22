@@ -14,6 +14,7 @@ import { TextPieceDirective } from './directives/text-piece.directive';
 import { CommonModule } from '@angular/common';
 import { AppendRootDirective } from './directives/append-root.directive';
 import { TextScreenComponent } from './components/text-interface/text-screen/text-screen.component';
+import { ErrorMsgPieceDirective } from './directives/error-msg-piece.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TextScreenComponent } from './components/text-interface/text-screen/tex
     SanityBarComponent,
     TextPieceDirective,
     AppendRootDirective,
-    TextScreenComponent
+    TextScreenComponent,
+    ErrorMsgPieceDirective
   ],
   imports: [
     BrowserModule,

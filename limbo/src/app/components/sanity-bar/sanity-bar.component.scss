@@ -1,17 +1,43 @@
-.sanity-bar-left {
-  width: 20vw;
+.sanity-bar {
+  // transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   position: fixed;
+  height: 100vh;
+  width: 100vw;
   top: 0;
   left: 0;
-  height: 100vh;
-  background-color: black;
+  z-index: -1;
+
+  &.flash {
+    animation: 0.4s step-end 2 flash;
+  }
 }
 
-.sanity-bar-right {
-  width: 20vw;
+.health-bar {
   position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  background-color: black;
+  top: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1rem;
+  width: 40rem;
+  background-color:#212529;
+  transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.health-bar-outline {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2rem;
+  width: 41rem;
+  background-color: white;
+  border: 4px solid#212529;
+}
+
+@keyframes flash {
+  0% {
+    border: 8px solid red;
+  }
+  50% {
+    border: 8px solid white;
+  }
 }

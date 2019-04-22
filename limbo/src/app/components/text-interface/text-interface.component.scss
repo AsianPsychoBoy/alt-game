@@ -1,17 +1,27 @@
 .text-container {
-  max-height: 65vh;
+  height: 56vh;
   overflow-y: scroll;
+  margin-top: 6vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   &::-webkit-scrollbar-track
   {
-    background-color: #F5F5F5;
+    background-color: #FFF;
   }
   &::-webkit-scrollbar
   {
-    width: 1px;
-    background-color: #F5F5F5;
+    width: 2px;
+    background-color: #FFF;
   }
   &::-webkit-scrollbar-thumb {
     background-color: #000000;
+  }
+  .title-screen {
+    flex-grow: 1;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -20,18 +30,18 @@
 	top: 0;
 	display: block;
 	border-radius: 0;
-	border: 2px solid black;
-	box-shadow: 0 6px 0 black;
+	border: 2px solid#212529;
+	box-shadow: 0 6px 0#212529;
 	margin-bottom: 20px;
 	transition: none;
 	&:active {
 		top: 6px;
-		box-shadow: 0 0 0 black;
+		box-shadow: 0 0 0#212529;
 	}
 }
 
 .scary {
-  background-color: black;
+  background-color:black;
   color: white;
   position: absolute;
   top: 40%;
@@ -49,7 +59,7 @@
   height: 1.75rem;
   width: 6rem;
   display: inline-block;
-  background-color: black;
+  background-color:black;
   vertical-align: bottom;
   &:after {
     content: '';

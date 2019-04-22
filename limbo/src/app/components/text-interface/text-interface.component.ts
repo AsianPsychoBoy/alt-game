@@ -23,4 +23,10 @@ export class TextInterfaceComponent implements OnInit {
 	);
   }
 
+  scrollToBottom() {
+    const el:Element = document.getElementsByClassName('text-container').item(0);
+    el.scrollTop = el.scrollHeight;
+    console.log('scroll', el, el.scrollTop, el.scrollHeight)
+  }
+
 }

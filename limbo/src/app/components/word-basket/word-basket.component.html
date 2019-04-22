@@ -4,13 +4,13 @@
         <div class="">
           <div class="command-caret">></div>
         </div>
-        <div class="col-sm-2 d-flex justify-content-center align-items-center" *ngFor="let word of commandList">
-            <div class="command-word">{{word.string}}</div>
+        <div class="d-flex justify-content-center align-items-center" *ngFor="let word of commandList">
+            <div class="command-word">{{word.string}}--></div>
         </div>
         <div class="">
-          <div class="command-caret">_</div>
+          <div class="command-caret underscore">_</div>
         </div>
-        <div class="ml-auto" *ngIf="commandList.length > 0">
+        <div class="ml-auto enter" *ngIf="commandList.length > 0" (click)="runCommand">
           <div class="command-caret">↵</div>
         </div>
     </div>
@@ -18,7 +18,7 @@
       <div class="col-sm-4 d-flex justify-content-center align-items-center"
         *ngFor="let word of hyperlinkService.wordList"
         (click)="toggleWord(word)">
-        <div class="word" [class.selected]="checkSelected(word)">{{word.string}} ({{word.id}})</div>
+        <div class="word" [class.selected]="checkSelected(word)">{{word.string}}</div>
       </div>
     </div>
   </div>

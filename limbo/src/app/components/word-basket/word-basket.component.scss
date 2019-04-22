@@ -8,20 +8,36 @@
   .control-panel {
     width: 760px;
     height: 100%;
-    border: 2px solid black;
+    border: 4px solid#212529;
     font-family: 'Source Code Pro', monospace;
     .command {
       height: 72px;
-      border-bottom: 2px solid black;
+      border-bottom: 4px solid#212529;
       padding: 8px;
+      .command-word {
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+      }
       &.error {
         box-shadow: inset 0 0 0 4px red;
       }
       &.success {
         box-shadow: inset 0 0 0 4px green;
       }
+      .enter {
+        width: 4rem;
+        text-align: center;
+        &:hover {
+          cursor: pointer;
+          background-color:#212529;
+          color: white;
+        }
+      }
       .command-caret {
         font-size: 2.25rem;
+        &.underscore {
+          animation: 1s step-end infinite underscore-flash;
+        }
       }
     }
     .word-basket {
@@ -30,7 +46,7 @@
       // overflow-y: scroll;
       // &::-webkit-scrollbar-track
       // {
-      //   border: 1px solid black;
+      //   border: 1px solid#212529;
       //   background-color: #F5F5F5;
       // }
       // &::-webkit-scrollbar
@@ -44,13 +60,24 @@
       // }
       .word {
         text-align: center;
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+        font-weight: 600;
         padding: 8px;
       }
       .selected {
         color: white;
-        background-color: black;
+        background-color:#212529;
       }
     }
+  }
+}
+
+@keyframes underscore-flash {
+  0% {
+    color: white;
+  }
+
+  50% {
+    color: #212529
   }
 }

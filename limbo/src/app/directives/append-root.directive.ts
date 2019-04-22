@@ -1,11 +1,11 @@
-import { Directive, ViewContainerRef, ViewChildren, QueryList, OnInit, TemplateRef } from '@angular/core';
+import { Directive, ViewContainerRef, ViewChildren, QueryList, OnInit, TemplateRef, AfterViewInit } from '@angular/core';
 import { TextPieceDirective } from './text-piece.directive';
 import { merge, Observable, Subscription } from 'rxjs';
 
 @Directive({
   selector: '[appAppendRoot]'
 })
-export class AppendRootDirective implements OnInit {
+export class AppendRootDirective implements AfterViewInit {
 
   @ViewChildren(TextPieceDirective)
   textPieces !: QueryList<TextPieceDirective>;
@@ -14,7 +14,8 @@ export class AppendRootDirective implements OnInit {
 
   constructor(public viewContainer: ViewContainerRef) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    console.log(this.textPieces);
     this.textPieces.changes.subscribe(() => {
       this.createViewSubscription.unsubscribe();
       this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))

@@ -1,6 +1,8 @@
-import { Component, ViewContainerRef, ContentChildren, QueryList, OnInit, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, ViewContainerRef, ContentChildren, QueryList, OnInit, AfterViewInit, Renderer2, ViewChildren, EventEmitter, Output } from '@angular/core';
 import { TextPieceDirective } from '../../../directives/text-piece.directive';
 import { merge, Observable, Subscription } from 'rxjs';
+import { GameProgressionService } from 'src/app/services/game-progression.service';
+import { ErrorMsgPieceDirective } from 'src/app/directives/error-msg-piece.directive';
 
 @Component({
   selector: 'app-text-screen',
@@ -12,9 +14,18 @@ export class TextScreenComponent implements AfterViewInit {
   @ContentChildren(TextPieceDirective)
   textPieces !: QueryList<TextPieceDirective>;
 
+  @ViewChildren(ErrorMsgPieceDirective)
+  errorMsgs !: QueryList<ErrorMsgPieceDirective>;
+
   createViewSubscription: Subscription;
 
-  constructor(public viewContainer: ViewContainerRef) { }
+  newErrorText: string[] = [];
+
+  errMsgCount = 0;
+
+  @Output() heightChanged = new EventEmitter<boolean>();
+
+  constructor(public viewContainer: ViewContainerRef, private gps: GameProgressionService, private renderer2: Renderer2) { }
 
   ngAfterViewInit() {
     this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
@@ -25,9 +36,22 @@ export class TextScreenComponent implements AfterViewInit {
       this.createViewSubscription.unsubscribe();
       this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
       .subscribe(template => {
-        this.viewContainer.createEmbeddedView(template);
+        this.viewContainer.createEmbeddedView(template).detectChanges();
+        this.heightChanged.emit(true);
       });
     });
+
+    this.gps.displayText.subscribe(text => {
+      this.newErrorText.push(text.text);
+      this.errMsgCount += 1;
+    });
+
+    this.errorMsgs.first.addErrorMsg$.subscribe(template => {
+      console.log('new msg')
+      const text = this.newErrorText[this.newErrorText.length - 1];
+      this.viewContainer.createEmbeddedView(template, {$implicit: text}).detectChanges();
+      this.heightChanged.emit(true);
+    })
   }
 
 }

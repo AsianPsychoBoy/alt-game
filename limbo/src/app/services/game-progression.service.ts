@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Word } from '../common/Word';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class GameProgressionService {
@@ -9,20 +9,38 @@ export class GameProgressionService {
   currentLevelIndex = 0;
 
   sanityScore = 100;
+  sanityScore$ = new Subject<number>();
 
+  currentCommand: Word[];
   currentItems: [];
+
+  displayText = new Subject<{
+    text: string,
+    wordList: string[]
+  }>();
 
   constructor() { }
 
+  generateErrorMessage(wordCommand: Word[]) {
+    const words = wordCommand.map(w => w.string);
+    const msgList = [
+      `"${words.join(', ')}", I thought to myself, "what non-sense!"`,
+      `"${words.join('? ')}?", why do these words come to mind?`
+    ]
+    return msgList[Math.floor(Math.random() * msgList.length)];
+  }
+
   checkCombination(wordCommand: Word[]): Observable<boolean> {
+    this.currentCommand = wordCommand;
     return new Observable((subscriber) => {
-      const command = wordCommand.map(word => word.id);
+      const command = wordCommand.map(word => word.string);
       let matched = false;
+      let isBad = false;
       for (let i = 0; i < levels.length; i ++) {
         if (
           levels[i].requirement.level === (this.currentLevel - this.currentLevel % 1) &&
           levels[i].requirement.command.length > 0 &&
-          levels[i].requirement.command.every((id, index) => id === command[index])
+          levels[i].requirement.command.every((word, index) => word === command[index])
           // Do the items checking
         ) {
           this.currentLevel = levels[i].number;
@@ -30,15 +48,24 @@ export class GameProgressionService {
           levels[i].unlocked++;
           console.log('command navigate: ', levels[i].number);
           matched = true;
+          isBad = levels[i].isBad;
           break;
         }
       }
 
-      if (matched) {
+      if (matched && !isBad) {
         subscriber.next(true);
         subscriber.complete();
       } else {
-        this.sanityScore -= 5;
+        if (matched && isBad) {
+          this.sanityScore -= 33;
+          this.sanityScore$.next(this.sanityScore);
+        } else {
+          this.displayText.next({
+            text: this.generateErrorMessage(wordCommand),
+            wordList: []
+          });
+        }
         subscriber.next(false);
         subscriber.complete();
       }
@@ -67,55 +94,64 @@ export class GameProgressionService {
 	  return unlockedLevel ? unlockedLevel.unlocked : 0;
   }
 
+  getSanityScore(): Observable<number> {
+    return this.sanityScore$.asObservable();
+  }
+
 }
 
 const levels = [
   {
-    number: 0.1,
+    number: 1.1,
     unlocked: 0,
+    isBad: false,
     requirement: {
-      level: 0,
+      level: 1,
       command: [],
       items: []
     }},
   {
     number: 1,
     unlocked: 0,
+    isBad: false,
     requirement: {
 		  level: 0,
       items: []
     }
   },
   {
-    number: 1.1,
-    unlocked: 0,
-    requirement: {
-      level: 1,
-      command: [2, 3],
-      items: []
-    }
-  },
-  {
     number: 2,
-    unlocked: 0,
+    unlocked: 1,
+    isBad: false,
     requirement: {
-      level: 1,
-      command: [],
+		  level: 1,
       items: []
     }
   },
   {
     number: 2.1,
     unlocked: 0,
+    isBad: false,
     requirement: {
       level: 2,
-      command: [7, 6], // eyes alan
+      command: ['inside', 'building'],
       items: []
     }
   },
   {
-    number: 2.11,
+    number: 2.2,
     unlocked: 0,
+    isBad: true,
+    requirement: {
+      level: 2,
+      command: ['cold', 'inside'],
+      items: []
+    }
+  },
+  {
+    number: 3,
+    unlocked: 0,
+    isBad: false,
     requirement: {
       level: 2,
       command: [],
@@ -123,37 +159,61 @@ const levels = [
     }
   },
   {
-    number: 2.2,
+    number: 3.1,
     unlocked: 0,
+    isBad: false,
     requirement: {
-      level: 2,
-      command: [2, 5], // inside room
+      level: 3,
+      command: ['eyes', 'alan'], // eyes alan
       items: []
     }
   },
   {
-    number: 2.2,
+    number: 3.11,
     unlocked: 0,
+    isBad: false,
     requirement: {
-      level: 2,
-      command: [7, 5], // eyes room
+      level: 3,
+      command: [],
       items: []
     }
   },
   {
-    number: 2.3,
+    number: 3.2,
     unlocked: 0,
+    isBad: false,
     requirement: {
-      level: 2,
-      command: [4, 8], // walked room
+      level: 3,
+      command: ['inside', 'room'], // inside room
       items: []
     }
   },
   {
-    number: 3,
+    number: 3.2,
     unlocked: 0,
+    isBad: false,
     requirement: {
-      level: 2,
+      level: 3,
+      command: ['eyes', 'room'], // eyes room
+      items: []
+    }
+  },
+  {
+    number: 3.3,
+    unlocked: 0,
+    isBad: false,
+    requirement: {
+      level: 3,
+      command: ['walked', 'room'], // walked room
+      items: []
+    }
+  },
+  {
+    number: 4,
+    unlocked: 0,
+    isBad: false,
+    requirement: {
+      level: 3,
       command: [],
       items: []
     }

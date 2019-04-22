@@ -38,15 +38,15 @@ export class WordBasketComponent implements OnInit {
       this.gameService.checkCombination(this.commandList).subscribe(
         success => {
           if (success) {
-            this.commandIndicator = 2;
-            setTimeout(() => {
+            // this.commandIndicator = 2;
+            // setTimeout(() => {
               this.commandList = [];
-              this.commandIndicator = 0;
-            }, 600);
+            //   this.commandIndicator = 0;
+            // }, 600);
           } else {
 			this.commandList = [];
-   this.commandIndicator = 1;
-   setTimeout(() => this.commandIndicator = 0, 600);
+  //  this.commandIndicator = 1;
+  //  setTimeout(() => this.commandIndicator = 0, 600);
           }
         }
       );

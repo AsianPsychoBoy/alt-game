@@ -8,9 +8,21 @@ import { GameProgressionService } from 'src/app/services/game-progression.servic
 })
 export class SanityBarComponent implements OnInit {
 
+  flash: boolean;
+
+  sanityScore: number = 100;
+
   constructor(public gps: GameProgressionService) { }
 
   ngOnInit() {
+    this.gps.getSanityScore().subscribe(s => {
+      if (this.sanityScore > s) {
+        this.flash = true;
+        setTimeout(() => this.flash = false, 4000);
+      }
+      this.sanityScore = s;
+    });
   }
+
 
 }
