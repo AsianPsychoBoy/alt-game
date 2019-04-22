@@ -164,7 +164,7 @@ const levels = [
     isBad: false,
     requirement: {
       level: 3,
-      command: ['eyes', 'alan'], // eyes alan
+      command: ['eyes', 'Alan Bennet'], // eyes alan
       items: []
     }
   },

@@ -45,7 +45,7 @@
     <p class="text-center">
       Click on words to collect them (max 9)<br/>
       Use <span class="linkable-word">words</span> to build actions<br/>
-      Wrong actions will impair your sanity!
+      Wrong actions will impair your sanity!<br/>
       Buttons means progress<br/>
       <a class="black-link" (click)="gotoLevel(1.1)"></a> means ⠀⠀⠀⠀⠀⠀⠀<span class="scary glitch" *ngIf="gps.isUnlocked(1.1)">curiosity killed the cat</span><br/>
     </p>
@@ -69,7 +69,7 @@
 
     <ng-container *appTextPiece="gps.isUnlocked(2.2)">
         <p>
-
+          It's cold inside. It's freezing inside. In a certain frozen corner of my mind, I found myself curled
         </p>
     </ng-container>
   </app-text-screen>
