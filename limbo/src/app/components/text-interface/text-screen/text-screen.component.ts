@@ -31,6 +31,7 @@ export class TextScreenComponent implements AfterViewInit {
     this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
     .subscribe(template => {
       this.viewContainer.createEmbeddedView(template);
+      this.heightChanged.emit(true);
     });
     this.textPieces.changes.subscribe(() => {
       this.createViewSubscription.unsubscribe();
