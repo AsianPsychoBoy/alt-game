@@ -1,6 +1,6 @@
-import { Directive, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, OnInit, Input } from '@angular/core';
 import { HyperlinkService } from '../services/hyperlink.service';
-import { Word } from '../common/Word';
+import { Word, AllWordProperties } from '../common/Word';
 import { GameProgressionService } from '../services/game-progression.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -15,10 +15,14 @@ export class HyperlinkDirective implements OnInit {
   offsetX: number;
   offsetY: number;
 
+  @Input() set wordProperties(prop: AllWordProperties) {
+    if (!prop) throw new Error('buh');
+    this.word = new Word(this.el.nativeElement.innerText, this.hyperlinkService.newWordId(), prop);
+  };
+
 	constructor(private el: ElementRef, private hyperlinkService: HyperlinkService, private gameProgressionService: GameProgressionService) { }
 
   ngOnInit() {
-    this.word = new Word(this.el.nativeElement.innerText, this.hyperlinkService.newWordId());
     const element: HTMLElement = this.el.nativeElement;
     element.classList.add('linkable-word');
 
