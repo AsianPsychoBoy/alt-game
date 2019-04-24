@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Word } from '../common/Word';
 import { Observable, Subject } from 'rxjs';
+import { NumberSymbol } from '@angular/common';
 
 @Injectable()
 export class GameProgressionService {
@@ -13,6 +14,7 @@ export class GameProgressionService {
 
   currentCommand: Word[];
   currentItems: [];
+  currentLocation: [];
 
   displayText = new Subject<{
     text: string,
@@ -26,21 +28,21 @@ export class GameProgressionService {
     const msgList = [
       `"${words.join(', ')}", I thought to myself, "what non-sense!"`,
       `"${words.join('? ')}?", why do these words come to mind?`
-    ]
+    ];
     return msgList[Math.floor(Math.random() * msgList.length)];
   }
 
   checkCombination(wordCommand: Word[]): Observable<boolean> {
     this.currentCommand = wordCommand;
     return new Observable((subscriber) => {
-      const command = wordCommand.map(word => word.string);
       let matched = false;
       let isBad = false;
       for (let i = 0; i < levels.length; i ++) {
         if (
           levels[i].requirement.level === (this.currentLevel - this.currentLevel % 1) &&
           levels[i].requirement.command.length > 0 &&
-          levels[i].requirement.command.every((word, index) => word === command[index])
+		  levels[i].requirement.command[0] === wordCommand[0].properties.type &&
+		  levels[i].requirement.command[1] === wordCommand[1].string
           // Do the items checking
         ) {
           this.currentLevel = levels[i].number;
@@ -91,7 +93,7 @@ export class GameProgressionService {
 
   isUnlocked(n: number): number {
     const unlockedLevel = levels.find(lvl => lvl.number === n && lvl.unlocked !== 0);
-	  return unlockedLevel ? unlockedLevel.unlocked : 0;
+	   return unlockedLevel ? unlockedLevel.unlocked : 0;
   }
 
   getSanityScore(): Observable<number> {
@@ -100,11 +102,26 @@ export class GameProgressionService {
 
 }
 
+export interface Level {
+	number: number;
+	unlocked: number;
+	isBad: boolean;
+}
+
+export enum PLACES {
+	outsideOfBuilding,
+	building,
+	room,
+	office
+
+}
+
 const levels = [
   {
     number: 1.1,
     unlocked: 0,
-    isBad: false,
+	isBad: false,
+	place: PLACES.outsideOfBuilding,
     requirement: {
       level: 1,
       command: [],
@@ -113,16 +130,18 @@ const levels = [
   {
     number: 1,
     unlocked: 0,
-    isBad: false,
+	isBad: false,
+	place: PLACES.outsideOfBuilding,
     requirement: {
-		  level: 0,
+		level: 0,
       items: []
     }
   },
   {
     number: 2,
     unlocked: 1,
-    isBad: false,
+	isBad: false,
+	place: PLACES.outsideOfBuilding,
     requirement: {
 		  level: 1,
       items: []
@@ -131,23 +150,25 @@ const levels = [
   {
     number: 2.1,
     unlocked: 0,
-    isBad: false,
+	isBad: false,
+	place: PLACES.building,
     requirement: {
       level: 2,
-      command: ['inside', 'building'],
-      items: []
+      command: ['travelTo', 'building'],
+	  items: [],
+	  place: PLACES.outsideOfBuilding
     }
   },
-  {
-    number: 2.2,
-    unlocked: 0,
-    isBad: true,
-    requirement: {
-      level: 2,
-      command: ['cold', 'inside'],
-      items: []
-    }
-  },
+//   {
+//     number: 2.2,
+//     unlocked: 0,
+//     isBad: true,
+//     requirement: {
+//       level: 2,
+//       command: ['cold', 'inside'],
+//       items: []
+//     }
+//   },
   {
     number: 3,
     unlocked: 0,

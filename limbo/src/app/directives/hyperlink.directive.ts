@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostListener, OnInit, Input } from '@angular/core';
 import { HyperlinkService } from '../services/hyperlink.service';
-import { Word, AllWordProperties } from '../common/Word';
+import { Word, AllWordProperties, PART_OF_SPEECH } from '../common/Word';
 import { GameProgressionService } from '../services/game-progression.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -15,8 +15,12 @@ export class HyperlinkDirective implements OnInit {
   offsetX: number;
   offsetY: number;
 
-  @Input() set wordProperties(prop: AllWordProperties) {
-    if (!prop) throw new Error('buh');
+  @Input() set wordProperties(propString: string) {
+	const propList = propString.split(' ');
+	const prop: AllWordProperties = {
+		partOfSpeech: propList[0] as any,
+		type: propList[1] as any
+	};
     this.word = new Word(this.el.nativeElement.innerText, this.hyperlinkService.newWordId(), prop);
   };
 

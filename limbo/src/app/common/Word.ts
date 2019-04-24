@@ -11,20 +11,20 @@ export class Word {
 }
 
 export enum PART_OF_SPEECH {
-  verb,
-  noun
+  verb = 'verb',
+  noun = 'noun'
 }
 
 export enum VERB_TYPES {
-  travelTo,
-  examine,
-  interact
+  travelTo = 'travelTo',
+  examine = 'examine',
+  interact = 'interact'
 }
 
 export enum NOUN_TYPES {
-  place,
-  person,
-  object
+  place = 'place',
+  person = 'person',
+  object = 'object'
 }
 
 export interface VerbProperties {
