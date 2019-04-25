@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HyperlinkDirective } from './directives/hyperlink.directive';
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { AppendRootDirective } from './directives/append-root.directive';
 import { TextScreenComponent } from './components/text-interface/text-screen/text-screen.component';
 import { ErrorMsgPieceDirective } from './directives/error-msg-piece.directive';
+import { TextPieceComponent } from './components/text-piece/text-piece.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,14 @@ import { ErrorMsgPieceDirective } from './directives/error-msg-piece.directive';
     TextPieceDirective,
     AppendRootDirective,
     TextScreenComponent,
-    ErrorMsgPieceDirective
+    ErrorMsgPieceDirective,
+    TextPieceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
   providers: [
     HyperlinkService,

@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HyperlinkService } from '../../services/hyperlink.service';
-import { Word } from '../../common/Word';
+import { Word, PART_OF_SPEECH, NOUN_TYPES } from '../../common/Word';
 import { GameProgressionService } from '../../services/game-progression.service';
 
 @Component({
@@ -22,7 +22,9 @@ export class WordBasketComponent implements OnInit {
 	toggleWord(word: Word) {
     const index = this.commandList.findIndex((w) => w.id === word.id);
     if (index < 0) {
-      this.commandList.push(word);
+      if (this.commandList.length <= 2) {
+        this.commandList.push(word);
+      }
     } else {
       this.commandList.splice(index, 1);
     }

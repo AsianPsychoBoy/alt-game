@@ -3,6 +3,7 @@ import { TextPieceDirective } from '../../../directives/text-piece.directive';
 import { merge, Observable, Subscription } from 'rxjs';
 import { GameProgressionService } from 'src/app/services/game-progression.service';
 import { ErrorMsgPieceDirective } from 'src/app/directives/error-msg-piece.directive';
+import { TextPieceComponent } from '../../text-piece/text-piece.component';
 
 @Component({
   selector: 'app-text-screen',

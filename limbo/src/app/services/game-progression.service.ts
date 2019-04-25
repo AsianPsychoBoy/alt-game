@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Word } from '../common/Word';
+import { Word, VERB_TYPES, PART_OF_SPEECH } from '../common/Word';
 import { Observable, Subject } from 'rxjs';
 import { NumberSymbol } from '@angular/common';
 
@@ -14,7 +14,7 @@ export class GameProgressionService {
 
   currentCommand: Word[];
   currentItems: [];
-  currentLocation: [];
+  currentLocation: PLACES;
 
   displayText = new Subject<{
     text: string,
@@ -35,33 +35,38 @@ export class GameProgressionService {
   checkCombination(wordCommand: Word[]): Observable<boolean> {
     this.currentCommand = wordCommand;
     return new Observable((subscriber) => {
-      let matched = false;
+      let matchedIndex = undefined;
       let isBad = false;
-      for (let i = 0; i < levels.length; i ++) {
-        if (
-          levels[i].requirement.level === (this.currentLevel - this.currentLevel % 1) &&
-          levels[i].requirement.command.length > 0 &&
-		  levels[i].requirement.command[0] === wordCommand[0].properties.type &&
-		  levels[i].requirement.command[1] === wordCommand[1].string
-          // Do the items checking
-        ) {
-          this.currentLevel = levels[i].number;
-          this.currentLevelIndex = i;
-          levels[i].unlocked++;
-          console.log('command navigate: ', levels[i].number);
-          matched = true;
-          isBad = levels[i].isBad;
-          break;
+      // parts of speech must match
+      if (wordCommand[0].properties.partOfSpeech === PART_OF_SPEECH.verb && wordCommand[1].properties.partOfSpeech === PART_OF_SPEECH.noun) {
+        for (let i = 0; i < levels.length; i ++) {
+          if (
+            levels[i].requirement.level === (this.currentLevel - this.currentLevel % 1) &&
+            levels[i].requirement.command.length > 0 &&
+        levels[i].requirement.command[0] === wordCommand[0].properties.type &&
+        levels[i].requirement.command[1] === wordCommand[1].string
+            // Do the items checking
+          ) {
+            this.currentLevel = levels[i].number;
+            this.currentLevelIndex = i;
+            levels[i].unlocked++;
+            console.log('command navigate: ', levels[i].number);
+            matchedIndex = i;
+            isBad = levels[i].isBad;
+            break;
+          }
         }
       }
 
-      if (matched && !isBad) {
+      if (matchedIndex && !isBad) {
         subscriber.next(true);
         subscriber.complete();
+        this.currentLocation = levels[matchedIndex].place;
       } else {
-        if (matched && isBad) {
+        if (matchedIndex && isBad) {
           this.sanityScore -= 33;
           this.sanityScore$.next(this.sanityScore);
+          this.currentLocation = levels[matchedIndex].place;
         } else {
           this.displayText.next({
             text: this.generateErrorMessage(wordCommand),
@@ -154,7 +159,7 @@ const levels = [
 	place: PLACES.building,
     requirement: {
       level: 2,
-      command: ['travelTo', 'building'],
+      command: [VERB_TYPES.travelTo, 'building'],
 	  items: [],
 	  place: PLACES.outsideOfBuilding
     }
@@ -173,60 +178,60 @@ const levels = [
     number: 3,
     unlocked: 0,
     isBad: false,
+    place: PLACES.room,
     requirement: {
       level: 2,
       command: [],
-      items: []
+      items: [],
+      place: PLACES.building,
     }
   },
   {
     number: 3.1,
     unlocked: 0,
-    isBad: false,
+    isBad: true,
+    place: PLACES.room,
     requirement: {
       level: 3,
-      command: ['eyes', 'Alan Bennet'], // eyes alan
-      items: []
+      command: [VERB_TYPES.examine, 'Alan Bennet'], // eyes alan
+      items: [],
+      place: PLACES.room,
     }
   },
   {
     number: 3.11,
     unlocked: 0,
     isBad: false,
+    place: PLACES.room,
     requirement: {
       level: 3,
       command: [],
-      items: []
+      items: [],
+      place: PLACES.room,
     }
   },
   {
     number: 3.2,
     unlocked: 0,
     isBad: false,
+    place: PLACES.room,
     requirement: {
       level: 3,
-      command: ['inside', 'room'], // inside room
-      items: []
-    }
-  },
-  {
-    number: 3.2,
-    unlocked: 0,
-    isBad: false,
-    requirement: {
-      level: 3,
-      command: ['eyes', 'room'], // eyes room
-      items: []
+      command: [VERB_TYPES.examine, 'room'], // inside room
+      items: [],
+      place: PLACES.room,
     }
   },
   {
     number: 3.3,
     unlocked: 0,
     isBad: false,
+    place: PLACES.office,
     requirement: {
       level: 3,
-      command: ['walked', 'room'], // walked room
-      items: []
+      command: [VERB_TYPES.travelTo, 'office'],
+      items: [],
+      place: PLACES.room,
     }
   },
   {
