@@ -54,4 +54,8 @@ export class WordBasketComponent implements OnInit {
       );
     }
   }
+
+  shouldPromptEnter(): boolean {
+    return this.commandList.length === 2;
+  }
 }
