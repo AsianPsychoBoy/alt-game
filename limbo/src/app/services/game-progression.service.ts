@@ -23,19 +23,25 @@ export class GameProgressionService {
 
   constructor() { }
 
-  generateErrorMessage(wordCommand: Word[]) {
+  generateErrorMessage(wordCommand: Word[], type: ERR_MSG_TYPES) {
     const words = wordCommand.map(w => w.string);
-    const msgList = [
-      `"${words.join(', ')}", I thought to myself, "what non-sense!"`,
-      `"${words.join('? ')}?", why do these words come to mind?`
-    ];
+	   const msgList =
+		type === ERR_MSG_TYPES.nonesense ? [
+			`"${words.join(', ')}", I thought to myself, "what non-sense!"`,
+			`"${words.join('? ')}?", why do these words come to mind?`
+		] :
+		type === ERR_MSG_TYPES.cannotReach ? [
+			`I can't get to ${words[1]} from here.`
+		] : [
+			`I don't understand these voices in my head.`
+		];
     return msgList[Math.floor(Math.random() * msgList.length)];
   }
 
   checkCombination(wordCommand: Word[]): Observable<boolean> {
     this.currentCommand = wordCommand;
     return new Observable((subscriber) => {
-      let matchedIndex = undefined;
+      let matchedIndex;
       let isBad = false;
       // parts of speech must match
       if (wordCommand[0].properties.partOfSpeech === PART_OF_SPEECH.verb && wordCommand[1].properties.partOfSpeech === PART_OF_SPEECH.noun) {
@@ -69,7 +75,7 @@ export class GameProgressionService {
           this.currentLocation = levels[matchedIndex].place;
         } else {
           this.displayText.next({
-            text: this.generateErrorMessage(wordCommand),
+            text: this.generateErrorMessage(wordCommand, ERR_MSG_TYPES.nonesense),
             wordList: []
           });
         }
@@ -245,3 +251,8 @@ const levels = [
     }
   },
 ];
+
+enum ERR_MSG_TYPES {
+	nonesense,
+	cannotReach,
+}

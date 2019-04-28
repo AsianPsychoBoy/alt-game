@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { GameProgressionService } from 'src/app/services/game-progression.service';
 import { ActivatedRoute } from '@angular/router';
-import { trigger,state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-text-interface',
@@ -25,6 +25,8 @@ export class TextInterfaceComponent implements OnInit {
 	  this.route.params.subscribe(p => {
 		p.id;
 	  });
+
+	  this.scrollToTop();
   }
 
   gotoLevel(n: number) {
@@ -34,9 +36,14 @@ export class TextInterfaceComponent implements OnInit {
   }
 
   scrollToBottom() {
-    const el:Element = document.getElementsByClassName('text-container').item(0);
+    const el: Element = document.getElementsByClassName('text-container').item(0);
     el.scrollTop = el.scrollHeight;
-    console.log('scroll', el, el.scrollTop, el.scrollHeight)
+    console.log('scroll', el, el.scrollTop, el.scrollHeight);
+  }
+
+  scrollToTop() {
+    const el: Element = document.getElementsByClassName('text-container').item(0);
+    el.scrollTop = 0;
   }
 
 }
