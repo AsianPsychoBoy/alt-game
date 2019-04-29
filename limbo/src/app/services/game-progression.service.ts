@@ -14,7 +14,7 @@ export class GameProgressionService {
   curiosityScore$ = new Subject<number>();
 
   currentCommand: Word[];
-  currentItems: [];
+  currentItems: ITEMS[];
   currentLocation: PLACES = PLACES.title;
   previousLocation: PLACES;
 
@@ -27,7 +27,7 @@ export class GameProgressionService {
 
   generateErrorMessage(wordCommand: Word[], type: ERR_MSG_TYPES) {
     const words = wordCommand.map(w => w.string);
-	  const msgList =
+	   const msgList =
       type === ERR_MSG_TYPES.nonesense ? [
         `"${words.join(', ')}", I thought to myself, "what non-sense!"`,
         `"${words.join('? ')}?", why do these words come to mind?`
@@ -37,9 +37,12 @@ export class GameProgressionService {
       ] :
       type === ERR_MSG_TYPES.cannotSee ? [
         `I can't see "${words[1]}" from the ${this.currentLocation}.`
-      ] : [
+      ] :
+	  type === ERR_MSG_TYPES.cannotThink ? [
+		  `${words[1]} does not remind me of anything.`
+	  ] : [
         `I don't understand these voices in my head.`
-      ];
+	  ];
     return msgList[Math.floor(Math.random() * msgList.length)];
   }
 
@@ -48,7 +51,7 @@ export class GameProgressionService {
     return new Observable((subscriber) => {
       let matchedIndex;
       let isBad = false;
-      let levelOverwrite: Partial<GameLevel> = {}
+      let levelOverwrite: Partial<GameLevel> = {};
 
       // parts of speech must match
       if (wordCommand[0].properties.partOfSpeech === PART_OF_SPEECH.verb && wordCommand[1].properties.partOfSpeech === PART_OF_SPEECH.noun) {
@@ -62,7 +65,7 @@ export class GameProgressionService {
           levelOverwrite = {
             place: this.currentLocation,
             number: this.currentLevel
-          }
+          };
         }
 
         for (let i = 0; i < levels.length; i ++) {
@@ -86,7 +89,12 @@ export class GameProgressionService {
         const newLevel = Object.assign(levels[matchedIndex], levelOverwrite);
         this.currentLevel = newLevel.number;
         this.currentLevelIndex = matchedIndex;
-        newLevel.unlocked++;
+		      newLevel.unlocked++;
+		      for (let i = 0; i < newLevel.getItems.length; i++) {
+			if (!this.currentItems.includes(newLevel.getItems[i])) {
+				this.currentItems.push(newLevel.getItems[i]);
+			}
+		}
         if (isBad) {
           this.sanityScore -= 33;
           this.sanityScore$.next(this.sanityScore);
@@ -101,12 +109,12 @@ export class GameProgressionService {
             text: this.generateErrorMessage(wordCommand, ERR_MSG_TYPES.cannotReach),
             type: 'error'
           });
-        } else if(wordCommand[0].properties.type === VERB_TYPES.examine) {
+        } else if (wordCommand[0].properties.type === VERB_TYPES.examine) {
           this.displayText.next({
             text: this.generateErrorMessage(wordCommand, ERR_MSG_TYPES.cannotSee),
             type: 'error'
           });
-        }else {
+        } else {
           this.displayText.next({
             text: this.generateErrorMessage(wordCommand, ERR_MSG_TYPES.nonesense),
             type: 'error'
@@ -166,23 +174,30 @@ export enum PLACES {
 	office
 }
 
+enum ITEMS {
+	cold_key,
+	limbo_key
+}
+
 interface GameLevel {
   number: number;
   unlocked: number;
   isBad: boolean;
   place: PLACES;
+  getItems: ITEMS[];
   requirement: {
     level: number[];
     command: string[];
-    items: [];
+    items: ITEMS[];
     place: PLACES[]
-  }
+  };
 }
 
 const levels: GameLevel[] = [
   {
     number: 1.001,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.tutorial,
     requirement: {
@@ -194,7 +209,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 1,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.tutorial,
     requirement: {
@@ -206,7 +222,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 2,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.outsideOfBuilding,
     requirement: {
@@ -218,7 +235,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 2.1,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.building,
     requirement: {
@@ -230,7 +248,7 @@ const levels: GameLevel[] = [
   },
 //   {
 //     number: 2.2,
-//     unlocked: 0,
+//     unlocked: 0, getItems: [],
 //     isBad: true,
 //     requirement: {
 //       level: 2,
@@ -240,7 +258,8 @@ const levels: GameLevel[] = [
 //   },
   {
     number: 3,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.building,
     requirement: {
@@ -252,7 +271,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 3.4,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.room,
     requirement: {
@@ -264,7 +284,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 3.1,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: true,
     place: PLACES.room,
     requirement: {
@@ -276,7 +297,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 3.11,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.room,
     requirement: {
@@ -288,7 +310,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 3.2,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.room,
     requirement: {
@@ -300,7 +323,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 3.3,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.room,
     requirement: {
@@ -312,7 +336,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 4,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [],
     isBad: false,
     place: PLACES.office,
     requirement: {
@@ -324,7 +349,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 0.1,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [ITEMS.cold_key],
     isBad: false,
     place: undefined,
     requirement: {
@@ -336,7 +362,8 @@ const levels: GameLevel[] = [
   },
   {
     number: 0.2,
-    unlocked: 0,
+	unlocked: 0,
+	getItems: [ITEMS.limbo_key],
     isBad: false,
     place: undefined,
     requirement: {
@@ -351,5 +378,7 @@ const levels: GameLevel[] = [
 enum ERR_MSG_TYPES {
 	nonesense,
   cannotReach,
-  cannotSee
+  cannotSee,
+  cannotThink
 }
+

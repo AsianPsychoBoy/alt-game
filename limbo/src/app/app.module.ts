@@ -17,6 +17,7 @@ import { AppendRootDirective } from './directives/append-root.directive';
 import { TextScreenComponent } from './components/text-interface/text-screen/text-screen.component';
 import { ErrorMsgPieceDirective } from './directives/error-msg-piece.directive';
 import { TextPieceComponent } from './components/text-piece/text-piece.component';
+import { ChapterEndComponent } from './components/text-interface/chapter-end/chapter-end.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TextPieceComponent } from './components/text-piece/text-piece.component
     AppendRootDirective,
     TextScreenComponent,
     ErrorMsgPieceDirective,
-    TextPieceComponent
+    TextPieceComponent,
+    ChapterEndComponent
   ],
   imports: [
     BrowserModule,
