@@ -1,4 +1,12 @@
-<div class="health-bar-outline"></div>
-<div class="health-bar" [style.width]="sanityScore / 100 * 40 + 'rem'"></div>
+<div class="bar-container">
+  <label>sanity</label>
+  <div class="sanity-bar-outline bar-outline">
+    <div class="sanity-bar bar" [style.width]="sanityScore / 100 * 20 + 'rem'"></div>
+  </div>
+  <label>curiosity</label>
+  <div class="curiosity-bar-outline bar-outline">
+    <div class="curiosity-bar bar" [style.width]="sanityScore / 100 * 20 + 'rem'"></div>
+  </div>
+</div>
 
-<div class="sanity-bar" [class.flash]="flash"></div>
+<div class="indicator" [class.flash]="flash"></div>

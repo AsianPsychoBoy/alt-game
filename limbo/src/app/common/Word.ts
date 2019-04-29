@@ -18,13 +18,16 @@ export enum PART_OF_SPEECH {
 export enum VERB_TYPES {
   travelTo = 'travelTo',
   examine = 'examine',
-  interact = 'interact'
+  interact = 'interact',
+  think = 'think'
 }
 
 export enum NOUN_TYPES {
   place = 'place',
   person = 'person',
-  object = 'object'
+  object = 'object',
+  back = 'back',
+  special = 'special'
 }
 
 export interface VerbProperties {

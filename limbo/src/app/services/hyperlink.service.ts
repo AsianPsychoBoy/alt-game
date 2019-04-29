@@ -17,7 +17,7 @@ export class HyperlinkService {
   }
 
 	toggleWord(word: Word) {
-    const index = this.wordList.findIndex((w) => w.id === word.id);
+    const index = this.wordList.findIndex((w) => w.string === word.string);
     if (index < 0) {
       this.wordList.push(word);
     } else {

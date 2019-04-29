@@ -20,9 +20,9 @@ export class WordBasketComponent implements OnInit {
   }
 
 	toggleWord(word: Word) {
-    const index = this.commandList.findIndex((w) => w.id === word.id);
+    const index = this.commandList.findIndex((w) => w.string === word.string);
     if (index < 0) {
-      if (this.commandList.length <= 2) {
+      if (this.commandList.length < 2) {
         this.commandList.push(word);
       }
     } else {

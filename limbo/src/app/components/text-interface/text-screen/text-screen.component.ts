@@ -4,11 +4,16 @@ import { merge, Observable, Subscription } from 'rxjs';
 import { GameProgressionService } from 'src/app/services/game-progression.service';
 import { ErrorMsgPieceDirective } from 'src/app/directives/error-msg-piece.directive';
 import { TextPieceComponent } from '../../text-piece/text-piece.component';
+import { filter } from 'rxjs/operators';
+import { textAppear } from 'src/app/common/animations';
 
 @Component({
   selector: 'app-text-screen',
   templateUrl: './text-screen.component.html',
-  styleUrls: ['./text-screen.component.scss']
+  styleUrls: ['./text-screen.component.scss'],
+  animations: [
+    textAppear
+  ]
 })
 export class TextScreenComponent implements AfterViewInit {
 
@@ -30,18 +35,21 @@ export class TextScreenComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
+    .pipe(
+      filter(t => !!t)
+    )
     .subscribe(template => {
-      this.viewContainer.createEmbeddedView(template);
+      this.viewContainer.createEmbeddedView(template).detectChanges();
       this.heightChanged.emit(true);
     });
-    this.textPieces.changes.subscribe(() => {
-      this.createViewSubscription.unsubscribe();
-      this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
-      .subscribe(template => {
-        this.viewContainer.createEmbeddedView(template).detectChanges();
-        this.heightChanged.emit(true);
-      });
-    });
+    // this.textPieces.changes.subscribe(() => {
+    //   this.createViewSubscription.unsubscribe();
+    //   this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
+    //   .subscribe(template => {
+    //     this.viewContainer.createEmbeddedView(template).detectChanges();
+    //     this.heightChanged.emit(true);
+    //   });
+    // });
 
     this.gps.displayText.subscribe(text => {
       this.newErrorText.push(text.text);

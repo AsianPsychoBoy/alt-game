@@ -1,5 +1,9 @@
 <ng-content></ng-content>
 
 <ng-template [appErrorMsgPiece]="errMsgCount" let-text>
-  <p>{{text}}</p>
+  <p @textAppear>{{text}}</p>
 </ng-template>
+
+<!-- <ng-template [appLvlIndPiece]="errMsgCount" let-text>
+    <p @textAppear>{{text}}</p>
+  </ng-template> -->

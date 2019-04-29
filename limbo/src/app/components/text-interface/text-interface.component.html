@@ -43,20 +43,21 @@
 
   <app-text-screen @textAppear *ngSwitchCase="1" (heightChanged)="scrollToBottom()"  class="title-screen">
     <p class="text-center">
-      Click on words to collect them (max 9)<br/>
+      Click on <span class="linkable-word">words</span> to collect them (max 9)<br/>
       Use <span class="linkable-word">words</span> to build actions<br/>
-      Wrong actions will impair your sanity!<br/>
+      Certain actions will consume sanity<br/>
+      Certain actions will consume curiosity<br/>
       Buttons means progress<br/>
-      <a class="black-link" (click)="gotoLevel(1.1)"></a> means ⠀⠀⠀⠀⠀⠀⠀<span class="scary glitch" *ngIf="gps.isUnlocked(1.1)">curiosity killed the cat</span><br/>
+      <a class="black-link" (click)="gotoLevel(1.001)"></a> means ⠀⠀⠀⠀⠀⠀⠀<span class="scary glitch" *ngIf="gps.isUnlocked(1.001)">curiosity killed the cat</span><br/>
     </p>
 
     <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(2)">continue</button>
   </app-text-screen>
 
 	<app-text-screen @textAppear *ngSwitchCase="2" (heightChanged)="scrollToBottom()">
-		<p class="lead">2018/3/15 Chicago</p>
+		<p class="lead">2018/3/15 Chicago, Outside of the in-patient building</p>
 		<p>
-			Finally good weather in weeks. The sun is out and strong, and its less windy than usual. Of course the cold is still there--it is always there. Even after two years living in this city, <span appHyperlink wordProperties="verb travelTo">walking</span> its streets, I have not gotten used to it. Call me a crybaby, but I am convinced there is something about this cold that manages to sink into my bones, lodging itself inside of me as an ancient being. Usually, I let my incessantly busy work at the psychiatric in-patient <span appHyperlink wordProperties="noun place">building</span> to keep myself occupied, because I could attend to others, listen to their requests and nurse them back to health instead of being reminded of my own failing physiology.
+			Finally good weather in weeks. The sun is out and strong, and its less windy than usual. Of course the cold is still there--it is always there. Even after two years living in this city, <span appHyperlink wordProperties="verb travelTo">walking</span> its streets, I have not gotten used to it. Call me a crybaby, but I am convinced there is something about this <span appHyperlink wordProperties="noun special">cold</span> that manages to sink into my bones, lodging itself inside of me as an ancient being. Usually, I let my incessantly busy work at the psychiatric in-patient <span appHyperlink wordProperties="noun place">building</span> to keep myself occupied, because I could attend to others, listen to their requests and nurse them back to health instead of being reminded of my own failing physiology.
 		</p>
 
 		<p>
@@ -73,20 +74,26 @@
 
     <div @textAppear *appTextPiece="gps.isUnlocked(2.2)">
         <p>
-          It's cold inside. It's freezing inside. In a certain corner of my mind, I found myself curled up on the side of the high way, snow accumulating on my body as I sighed my last breath: the bits of warmth turning into cystals of ice. A pair of eyes were watching me silently behind the behind the glass window of a car. The windshield of the car is stained with blood, my blood. The eyes were indifferent, because on a cold, grey side of the highway, an injured doe is as good as dead. <br/>
+          It's cold inside. It's freezing inside. In a certain corner of my mind, I found myself curled up on the side of the high way, snow accumulating on the ground and on my body as I sighed my last breath: the bits of warmth turning into cystals of ice. A pair of eyes were watching me silently behind the behind the glass window of a car. The windshield of the car is stained with blood, my blood. The eyes were indifferent, because on a cold, grey side of the highway, an injured doe is as good as dead. <br/>
           The car drove away.
         </p>
       </div>
   </app-text-screen>
 
 	<app-text-screen @textAppear *ngSwitchCase="3" (heightChanged)="scrollToBottom()">
-		<p class="lead">2018/3/15 Chicago</p>
+		<p class="lead">2018/3/15 Chicago, 3rd floor of the in-patient building</p>
 		<p>
-			Truth to be told I've been wanting to get rid of this note book for sometime now. The more time I spend on it, jotting down events at the ward, pieces of thoughts when I eat lunch or the patients I treated, the more I feel nervous that this very act of self-reflection would lead to the discovery, half-expected at this point, that there is something deeply wrong with me. Could be this habit of aimless note taking, or could be the cold in my bones. Or the way I spend entire afternoons <span appHyperlink  wordProperties="verb travelTo">staring</span> at a sedated man sleeping on the hospital bed, apricot colored sunlight slowing crawling across a face darkened by forgotten pain. In any case, I have my routines and its weak, yet precious balance, and I don't want to introduce any change to the system.
+			Truth to be told I've been wanting to get rid of this note book for sometime now. The more time I spend on it, jotting down events at the ward, pieces of thoughts when I eat lunch or the patients I treated, the more I feel nervous that this very act of self-reflection would lead to the discovery, half-expected at this point, that there is something deeply wrong with me. Could be this habit of aimless note taking, or could be the cold in my bones. Or the way I spend entire afternoons <span appHyperlink  wordProperties="verb examine">staring</span> at a sedated man sleeping on the hospital bed, apricot colored sunlight slowing crawling across a face darkened by forgotten pain... In any case, I have my routines and its weak, yet precious balance, and I don't want to introduce any change to the system.
 		</p>
 		<p>
-      In the morning, I did a routine checkup on the burn patient, which led me to believe that today is just another day I would put away to the back of my head and another page that would get buried by a thousand other identical pages, until I <span appHyperlink  wordProperties="verb travelTo">walked</span> into the <span appHyperlink  wordProperties="noun place">room</span> of <span appHyperlink wordProperties="noun person">Alan Bennet</span>. 5'11", male, 18 years old, blood type AB, half Asian, half White, probably a smart kid, probably good at math, probably aspire to be an electrical engineer, probably sneaks out of his housea at night with his friends…I let myself dream a little bit, constructing, in my mind, a happy teenager that I missed being, until reality pulled my eyes back to the document, and I realized all of those things I listed about him he has ceased to be, because the three words "persistent vegetative state" had ripped away everything that made him who he is. I stopped dead in my way, and thought about taking a break in my <span appHyperlink wordProperties="noun person">office</span>.
+      In the morning, I did a routine checkup on the burn patient, which led me to believe that today is just another day I would put away to the back of my head and another page that would get buried by a thousand other identical pages, until I <span appHyperlink  wordProperties="verb travelTo">walked</span> into the <span appHyperlink  wordProperties="noun place">room</span> of <span appHyperlink wordProperties="noun person">Alan Bennet</span>.
     </p>
+
+    <div @textAppear *appTextPiece="gps.isUnlocked(3.4)">
+      <p>
+        5'11", male, 18 years old, blood type AB, half Asian, half White, probably a smart kid, probably good at math, probably aspire to be an electrical engineer, probably sneaks out of his housea at night with his friends…I let myself dream a little bit, constructing, in my mind, a happy teenager that I missed being, until reality pulled my eyes back to the document, and I realized all of those things I listed about him he has ceased to be, because the three words "persistent vegetative state" had ripped away everything that made him who he is. I stopped dead in my way, and thought about taking a break in my <span appHyperlink wordProperties="noun place">office</span>.
+      </p>
+    </div>
 
     <div @textAppear *appTextPiece="gps.isUnlocked(3.2)">
       <p>
@@ -108,7 +115,7 @@
 
     <div @textAppear *appTextPiece="gps.isUnlocked(3.3)">
       <p>
-          I ran back to my office to get my blanket and wrapped it tightly around myself. Then I poured myself a cup of hot coffee and drank it in three big gulps, burning my tongue. After I warmed up for a little bit, I read the rest of his document. On the night March 14th, Alan attempt suicide by jumping off of his 4-story apartment building when his mother was away buying groceries. Almost immediately a passerby saw the boy and called an ambulance. Doctors rushed him inside of an operation room, and fortunately, he survived. Unfortunately, the double failure of suicide and of modern medical technologies has led him to a place without answers and resolution, trapped inside of a limbo, half living, half dead.
+          I ran back to my office to get my blanket and wrapped it tightly around myself. Then I poured myself a cup of hot coffee and drank it in three big gulps, burning my tongue. After I warmed up for a little bit, I read the rest of his document. On the night March 14th, Alan attempt suicide by jumping off of his 4-story apartment building when his mother was away buying groceries. Almost immediately a passerby saw the boy and called an ambulance. Doctors rushed him inside of an operation room, and fortunately, he survived. Unfortunately, the double failure of suicide and of modern medical technologies has led him to a place without answers and resolution, trapped inside of a <span appHyperlink  wordProperties="noun special">limbo</span>, half living, half dead.
       </p>
 
       <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(4)">I have no mouth, and I must scream.</button>
@@ -116,9 +123,8 @@
   </app-text-screen>
 
   <div @textAppear *ngSwitchCase="4" (heightChanged)="scrollToBottom()">
-      I might have thrown around some bull last night but this morning I have gained back my senses. I have not forgotten my nurse training, so as long as I treated Alan like a textbook model, the banality of work would wash out my curiosity. Overthinking was never my thing anyways.
+      I might have thrown around some bull last night but this morning I have gained back my senses. I have not forgotten my nurse training, so as long as I treated Alan like a textbook model, the banality of work would wash out my curiosity. Over<span appHyperlink  wordProperties="verb think">think</span>ing was never my thing anyways.
 
       Alan's first visitor is a young college student named Blake Caulfield. He walked into the room with sharp steps and a penetrative look that made me retreat aside. We exchanged a brief greeting, and then he sat down silently on a chair beside the bed. His body is shaped like a few bold, black brush strokes, and his eyes reflected the world in a way that gives it his own shape and color.
   </div>
-  <!-- attach error messages markingthe decrease of sanity -->
 </div>
