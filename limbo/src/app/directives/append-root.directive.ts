@@ -3,26 +3,26 @@ import { TextPieceDirective } from './text-piece.directive';
 import { merge, Observable, Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[appAppendRoot]'
+	selector: '[appAppendRoot]'
 })
 export class AppendRootDirective implements AfterViewInit {
 
-  @ViewChildren(TextPieceDirective)
-  textPieces !: QueryList<TextPieceDirective>;
+	@ViewChildren(TextPieceDirective)
+	textPieces !: QueryList<TextPieceDirective>;
 
-  createViewSubscription: Subscription;
+	createViewSubscription: Subscription;
 
-  constructor(public viewContainer: ViewContainerRef) { }
+	constructor(public viewContainer: ViewContainerRef) { }
 
-  ngAfterViewInit() {
-    console.log(this.textPieces);
-    this.textPieces.changes.subscribe(() => {
-      this.createViewSubscription.unsubscribe();
-      this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
-      .subscribe(template => {
-        this.viewContainer.createEmbeddedView(template);
-      });
-    });
-  }
+	ngAfterViewInit() {
+		console.log(this.textPieces);
+		this.textPieces.changes.subscribe(() => {
+			this.createViewSubscription.unsubscribe();
+			this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
+			.subscribe(template => {
+				this.viewContainer.createEmbeddedView(template);
+			});
+		});
+	}
 
 }

@@ -2,24 +2,24 @@ import { Directive, TemplateRef, ViewContainerRef, Input, Host, SkipSelf, Option
 import { Subject, BehaviorSubject } from 'rxjs';
 
 @Directive({
-  selector: '[appTextPiece]'
+	selector: '[appTextPiece]'
 })
 export class TextPieceDirective {
 
-  private prevCount = 0;
+	private prevCount = 0;
 
-  addCopy$ = new BehaviorSubject<TemplateRef<any>>(undefined);
+	addCopy$ = new BehaviorSubject<TemplateRef<any>>(undefined);
 
-  @Input() set appTextPiece(count: number) {
-    if (count > 0) {
-      this.addCopy$.next(this.templateRef);
-    } else {
+	@Input() set appTextPiece(count: number) {
+		if (count > 0) {
+			this.addCopy$.next(this.templateRef);
+		} else {
 
-    }
-    this.prevCount = count;
-  }
+		}
+		this.prevCount = count;
+	}
 
-  constructor(
-    private templateRef: TemplateRef<any>,
-  ) { }
+	constructor(
+		private templateRef: TemplateRef<any>,
+	) { }
 }

@@ -2,17 +2,17 @@ import { Directive, TemplateRef, Input, ElementRef, Renderer2, ViewContainerRef 
 import { Subject } from 'rxjs';
 
 @Directive({
-  selector: '[appErrorMsgPiece]'
+	selector: '[appErrorMsgPiece]'
 })
 export class ErrorMsgPieceDirective {
 
-  addErrorMsg$ = new Subject<TemplateRef<any>>();
+	addErrorMsg$ = new Subject<TemplateRef<any>>();
 
-  @Input()
-  set appErrorMsgPiece(count: any) {
-    this.addErrorMsg$.next(this.templateRef);
-  }
+	@Input()
+	set appErrorMsgPiece(count: any) {
+		this.addErrorMsg$.next(this.templateRef);
+	}
 
-  constructor(public templateRef: TemplateRef<any>) { }
+	constructor(public templateRef: TemplateRef<any>) { }
 
 }

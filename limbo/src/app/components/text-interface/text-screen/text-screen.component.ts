@@ -8,60 +8,67 @@ import { filter } from 'rxjs/operators';
 import { textAppear } from 'src/app/common/animations';
 
 @Component({
-  selector: 'app-text-screen',
-  templateUrl: './text-screen.component.html',
-  styleUrls: ['./text-screen.component.scss'],
-  animations: [
-    textAppear
-  ]
+	selector: 'app-text-screen',
+	templateUrl: './text-screen.component.html',
+	styleUrls: ['./text-screen.component.scss'],
+	animations: [
+		textAppear
+	]
 })
 export class TextScreenComponent implements AfterViewInit {
 
-  @ContentChildren(TextPieceDirective)
-  textPieces !: QueryList<TextPieceDirective>;
+	@ContentChildren(TextPieceDirective)
+	textPieces !: QueryList<TextPieceDirective>;
 
-  @ViewChildren(ErrorMsgPieceDirective)
-  errorMsgs !: QueryList<ErrorMsgPieceDirective>;
+	@ViewChildren(TextPieceDirective)
+	lvlIndPieces: QueryList<TextPieceDirective>;
 
-  createViewSubscription: Subscription;
+	@ViewChildren(ErrorMsgPieceDirective)
+	errorMsgs !: QueryList<ErrorMsgPieceDirective>;
 
-  newErrorText: string[] = [];
+	createViewSubscription: Subscription;
 
-  errMsgCount = 0;
+	newErrorText: string[] = [];
 
-  @Output() heightChanged = new EventEmitter<boolean>();
+	errMsgCount = 0;
 
-  constructor(public viewContainer: ViewContainerRef, private gps: GameProgressionService, private renderer2: Renderer2) { }
+	@Output() heightChanged = new EventEmitter<boolean>();
 
-  ngAfterViewInit() {
-    this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
-    .pipe(
-      filter(t => !!t)
-    )
-    .subscribe(template => {
-      this.viewContainer.createEmbeddedView(template).detectChanges();
-      this.heightChanged.emit(true);
-    });
-    // this.textPieces.changes.subscribe(() => {
-    //   this.createViewSubscription.unsubscribe();
-    //   this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
-    //   .subscribe(template => {
-    //     this.viewContainer.createEmbeddedView(template).detectChanges();
-    //     this.heightChanged.emit(true);
-    //   });
-    // });
+	constructor(public viewContainer: ViewContainerRef, private gps: GameProgressionService, private renderer2: Renderer2) { }
 
-    this.gps.displayText.subscribe(text => {
-      this.newErrorText.push(text.text);
-      this.errMsgCount += 1;
-    });
+	ngAfterViewInit() {
+		this.createViewSubscription = merge(
+			...this.textPieces.map(textPiece => textPiece.addCopy$),
+			...this.lvlIndPieces.map(textPiece => textPiece.addCopy$)
+		)
+		.pipe(
+			filter(t => !!t)
+		)
+		.subscribe(template => {
+			console.log('generate', template);
+			this.viewContainer.createEmbeddedView(template).detectChanges();
+			this.heightChanged.emit(true);
+		});
+		// this.textPieces.changes.subscribe(() => {
+		//	 this.createViewSubscription.unsubscribe();
+		//	 this.createViewSubscription = merge(...this.textPieces.map(textPiece => textPiece.addCopy$))
+		//	 .subscribe(template => {
+		//		 this.viewContainer.createEmbeddedView(template).detectChanges();
+		//		 this.heightChanged.emit(true);
+		//	 });
+		// });
 
-    this.errorMsgs.first.addErrorMsg$.subscribe(template => {
-      console.log('new msg')
-      const text = this.newErrorText[this.newErrorText.length - 1];
-      this.viewContainer.createEmbeddedView(template, {$implicit: text}).detectChanges();
-      this.heightChanged.emit(true);
-    })
-  }
+		this.gps.displayText.subscribe(text => {
+			this.newErrorText.push(text.text);
+			this.errMsgCount += 1;
+		});
+
+		this.errorMsgs.first.addErrorMsg$.subscribe(template => {
+			console.log('new msg');
+			const text = this.newErrorText[this.newErrorText.length - 1];
+			this.viewContainer.createEmbeddedView(template, {$implicit: text}).detectChanges();
+			this.heightChanged.emit(true);
+		})
+	}
 
 }

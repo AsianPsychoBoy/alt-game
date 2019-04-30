@@ -4,40 +4,40 @@ import { ActivatedRoute } from '@angular/router';
 import { textAppear } from 'src/app/common/animations';
 
 @Component({
-  selector: 'app-text-interface',
-  templateUrl: './text-interface.component.html',
-  styleUrls: ['./text-interface.component.scss'],
-  animations: [
-    textAppear
-  ]
+	selector: 'app-text-interface',
+	templateUrl: './text-interface.component.html',
+	styleUrls: ['./text-interface.component.scss'],
+	animations: [
+		textAppear
+	]
 })
 export class TextInterfaceComponent implements OnInit {
 
-  constructor(public gps: GameProgressionService, private route: ActivatedRoute, private viewContainer: ViewContainerRef) { }
+	constructor(public gps: GameProgressionService, private route: ActivatedRoute, private viewContainer: ViewContainerRef) { }
 
-  ngOnInit() {
-	  this.route.params.subscribe(p => {
+	ngOnInit() {
+		this.route.params.subscribe(p => {
 		p.id;
-	  });
+		});
 
-	  this.scrollToTop();
-  }
+		this.scrollToTop();
+	}
 
-  gotoLevel(n: number) {
+	gotoLevel(n: number) {
 	this.gps.gotoLevel(n).subscribe(
 		success => {}
 	);
-  }
+	}
 
-  scrollToBottom() {
-    const el: Element = document.getElementsByClassName('text-container').item(0);
-    el.scrollTop = el.scrollHeight;
-    console.log('scroll', el, el.scrollTop, el.scrollHeight);
-  }
+	scrollToBottom() {
+		const el: Element = document.getElementsByClassName('text-container').item(0);
+		el.scrollTop = el.scrollHeight;
+		console.log('scroll', el, el.scrollTop, el.scrollHeight);
+	}
 
-  scrollToTop() {
-    const el: Element = document.getElementsByClassName('text-container').item(0);
-    el.scrollTop = 0;
-  }
+	scrollToTop() {
+		const el: Element = document.getElementsByClassName('text-container').item(0);
+		el.scrollTop = 0;
+	}
 
 }

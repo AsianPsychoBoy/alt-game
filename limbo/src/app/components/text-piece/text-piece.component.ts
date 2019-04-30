@@ -3,32 +3,32 @@ import { Subject } from 'rxjs';
 import { textAppear } from 'src/app/common/animations';
 
 @Component({
-  selector: 'app-text-piece',
-  templateUrl: './text-piece.component.html',
-  styleUrls: ['./text-piece.component.scss'],
-  animations: [
-    textAppear
-  ]
+	selector: 'app-text-piece',
+	templateUrl: './text-piece.component.html',
+	styleUrls: ['./text-piece.component.scss'],
+	animations: [
+		textAppear
+	]
 })
 export class TextPieceComponent implements OnInit {
-  private prevCount = 0;
+	private prevCount = 0;
 
-  addCopy$ = new Subject<TemplateRef<any>>();
+	addCopy$ = new Subject<TemplateRef<any>>();
 
-  @Input() set unlockCount(count: number) {
-    if (count > 0) {
-      this.addCopy$.next(this.templateRef);
-    } else {
+	@Input() set unlockCount(count: number) {
+		if (count > 0) {
+			this.addCopy$.next(this.templateRef);
+		} else {
 
-    }
-    this.prevCount = count;
-  }
+		}
+		this.prevCount = count;
+	}
 
-  @ViewChild('textTemplateref') templateRef: TemplateRef<any>
+	@ViewChild('textTemplateref') templateRef: TemplateRef<any>
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }

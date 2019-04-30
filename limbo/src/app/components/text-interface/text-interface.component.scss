@@ -1,32 +1,32 @@
 .text-container {
-  height: 56vh;
-  overflow-y: scroll;
-  margin-top: 6vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  &::-webkit-scrollbar-track
-  {
-    background-color: #FFF;
-  }
-  &::-webkit-scrollbar
-  {
-    width: 2px;
-    background-color: #FFF;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #000000;
-  }
-  .title-screen {
-    flex-grow: 1;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-  }
+	height: 56vh;
+	overflow-y: scroll;
+	margin-top: 6vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	&::-webkit-scrollbar-track
+	{
+		background-color: #FFF;
+	}
+	&::-webkit-scrollbar
+	{
+		width: 2px;
+		background-color: #FFF;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #000000;
+	}
+	.title-screen {
+		flex-grow: 1;
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .next-button {
-  font-size: 1.5rem;
+	font-size: 1.5rem;
 	position: relative;
 	top: 0;
 	display: block;
@@ -34,7 +34,7 @@
 	border: 2px solid#212529;
 	box-shadow: 0 6px 0#212529;
 	margin-bottom: 20px;
-  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 	&:active {
 		top: 6px;
 		box-shadow: 0 0 0#212529;
@@ -42,49 +42,49 @@
 }
 
 .scary {
-  background-color:black;
-  color: white;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-  transform-origin: center;
-  padding: 2rem;
+	background-color:black;
+	color: white;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -40%);
+	transform-origin: center;
+	padding: 2rem;
 }
 
 .glitch {
-  filter:url("#glitch");
+	filter:url("#glitch");
 }
 
 .black-link {
-  height: 1.75rem;
-  width: 6rem;
-  display: inline-block;
-  background-color:black;
-  vertical-align: bottom;
-  &:after {
-    content: '';
-    z-index: -1;
-    display: block;
-    position: relative;
-    height: 1.75rem;
-    width: 6rem;
-    top: -29px;
-    left: -1px;
-    background-color: rgb(25, 255, 23);
-  }
-  &:before {
-    content: '';
-    z-index: -1;
-    display: block;
-    position: relative;
-    height: 1.75rem;
-    width: 6rem;
-    top: 1px;
-    left: 1px;
-    background-color: rgb(241, 0, 255);
-  }
-  &:hover {
+	height: 1.75rem;
+	width: 6rem;
+	display: inline-block;
+	background-color:black;
+	vertical-align: bottom;
+	&:after {
+		content: '';
+		z-index: -1;
+		display: block;
+		position: relative;
+		height: 1.75rem;
+		width: 6rem;
+		top: -29px;
+		left: -1px;
+		background-color: rgb(25, 255, 23);
+	}
+	&:before {
+		content: '';
+		z-index: -1;
+		display: block;
+		position: relative;
+		height: 1.75rem;
+		width: 6rem;
+		top: 1px;
+		left: 1px;
+		background-color: rgb(241, 0, 255);
+	}
+	&:hover {
 // glitch animation
-  }
+	}
 }

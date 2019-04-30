@@ -1,9 +1,17 @@
 <ng-content></ng-content>
 
 <ng-template [appErrorMsgPiece]="errMsgCount" let-text>
-  <p @textAppear>{{text}}</p>
+	<p @textAppear>{{text}}</p>
 </ng-template>
 
 <!-- <ng-template [appLvlIndPiece]="errMsgCount" let-text>
-    <p @textAppear>{{text}}</p>
-  </ng-template> -->
+		<p @textAppear>{{text}}</p>
+	</ng-template> -->
+
+
+<div @textAppear *appTextPiece="gps.isUnlocked(0.1)">
+	<p>
+		It's cold inside. It's freezing inside. In a certain corner of my mind, I found myself curled up on the side of the high way, snow accumulating on the ground and on my body as I sighed my last breath: the bits of warmth turning into cystals of ice. A pair of eyes were watching me silently behind the behind the glass window of a car. The windshield of the car is stained with blood, my blood. The eyes were indifferent, because on a cold, grey side of the highway, an injured doe is as good as dead. <br/>
+		The car drove away.
+	</p>
+</div>

@@ -20,29 +20,29 @@ import { TextPieceComponent } from './components/text-piece/text-piece.component
 import { ChapterEndComponent } from './components/text-interface/chapter-end/chapter-end.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HyperlinkDirective,
-    WordBasketComponent,
-    TextInterfaceComponent,
-    SanityBarComponent,
-    TextPieceDirective,
-    AppendRootDirective,
-    TextScreenComponent,
-    ErrorMsgPieceDirective,
-    TextPieceComponent,
-    ChapterEndComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CommonModule,
-    BrowserAnimationsModule
-  ],
-  providers: [
-    HyperlinkService,
-    GameProgressionService
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HyperlinkDirective,
+		WordBasketComponent,
+		TextInterfaceComponent,
+		SanityBarComponent,
+		TextPieceDirective,
+		AppendRootDirective,
+		TextScreenComponent,
+		ErrorMsgPieceDirective,
+		TextPieceComponent,
+		ChapterEndComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		CommonModule,
+		BrowserAnimationsModule
+	],
+	providers: [
+		HyperlinkService,
+		GameProgressionService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
