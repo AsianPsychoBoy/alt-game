@@ -74,7 +74,7 @@
 	</app-text-screen>
 
 	<app-text-screen @textAppear *ngSwitchCase="3" (heightChanged)="scrollToBottom()">
-		<p class="lead">2018/3/15 Chicago, 3rd floor of the in-patient building</p>
+		<p class="lead">2018/3/16 Chicago, 3rd floor of the in-patient building</p>
 		<p>
 			Truth to be told I've been wanting to get rid of this note book for sometime now. The more time I spend on it, jotting down events at the ward, pieces of thoughts when I eat lunch or the patients I treated, the more I feel nervous that this very act of self-reflection would lead to the discovery, half-expected at this point, that there is something deeply wrong with me. Could be this habit of aimless note taking, or could be the cold in my bones. Or the way I spend entire afternoons <span appHyperlink	wordProperties="verb examine">staring</span> at a sedated man sleeping on the hospital bed, apricot colored sunlight slowing crawling across a face darkened by forgotten pain... In any case, I have my routines and its weak, yet precious balance, and I don't want to introduce any change to the system.
 		</p>
@@ -116,12 +116,41 @@
 	</app-text-screen>
 
 	<app-text-screen @textAppear *ngSwitchCase="4" (heightChanged)="scrollToBottom()">
+		<p class="lead">2018/3/17 Chicago, outside of Alan's room</p>
 		<p>
-			I might have thrown around some bull last night but this morning I have gained back my senses. I have not forgotten my nurse training, so as long as I treated Alan like a textbook model, the banality of work would wash out my curiosity. Over<span appHyperlink	wordProperties="verb think">think</span>ing was never my thing anyways.
+			I might have thrown around some bull last night but this morning I have gained back my senses. I have not forgotten my nurse training, so as long as I treated Alan like a textbook model, the banality of work would wash out my curiosity. Over<span appHyperlink wordProperties="verb think">think</span>ing was never my thing anyways. When the kid was rolled into the hospital on a bed there was no one around, no crying parents clutching his white sheets, no 
 		</p>
-		<p>
-			Alan's first visitor is a young college student named Blake Caulfield. He walked into the room with sharp steps and a penetrative look that made me retreat aside. We exchanged a brief greeting, and then he sat down silently on a chair beside the bed. His body is shaped like a few bold, black brush strokes, and his eyes reflected the world in a way that gives it his own shape and color.
-		</p>
+		<div @textAppear *appTextPiece="gps.isUnlocked(4.1)">
+			<p>
+				Alan's first visitor is a young college student named Blake Caulfield. He walked into the room with sharp steps and a penetrative look that made me retreat aside. We exchanged a brief greeting, and then he sat down silently on a chair beside the bed.
+			</p>
+		</div>
+		<div @textAppear *appTextPiece="gps.isUnlocked(4.2)">
+			<p>
+				His body is shaped like a few bold, black brush strokes, and his eyes reflected the world in a way that gives it his own shape and color.
+			</p>
+		</div>
+		<div @textAppear *appTextPiece="gps.isUnlocked(4.2)">
+			<p>
+				"Alan, I don't know if you can hear this, but I'm sorry for everything. What happened to Charlette, and what happened to you. Everything…is broken now, and there is no way to fix it." The life support beeped on in its own rhythmical language. 
+			</p>
+		</div>
+		<div @textAppear *appTextPiece="gps.isUnlocked(4.3)">
+			<p>
+				The room fell silent again. Blake's eye never moved from Alan. The translucent blackness off his eyes casts a net over Alan's lifeless body. Alan's reflection now lives Blake's eyes, as if his soul might be preserved in that dark lake of tears. I felt the need for space between the two, maybe its better to walk out of the room.
+			</p>
+		</div>
+		<div @textAppear *appTextPiece="gps.isUnlocked(4.4)">
+			<p>
+				"Remember Charlotte?" Blake muttered, as I quietly closed the sliding the doors to the room. I felt like I was sealing away an unspeakable secret--though I have no part in it. 
+
+				Half an hour later I came back. Blake has left the room, but to my curiosity he left behind his backpack. I expected him to be back shortly, but he never was. 
+					
+				<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(5)"></button>
+			</p>
+		</div>
+		
+		</app-text-screen>
 	</app-text-screen>
 
 	<div @textAppear *ngSwitchCase="5" (heightChanged)="scrollToBottom()">
