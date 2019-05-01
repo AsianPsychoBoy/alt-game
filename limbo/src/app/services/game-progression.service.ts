@@ -157,7 +157,7 @@ export class GameProgressionService {
 
 	isUnlocked(n: number): number {
 		const unlockedLevel = levels.find(lvl => lvl.number === n && lvl.unlocked !== 0);
-		 return unlockedLevel ? unlockedLevel.unlocked : 0;
+		return unlockedLevel && unlockedLevel.repeatable ? unlockedLevel.unlocked : 0;
 	}
 
 	getSanityScore(): Observable<number> {
@@ -187,6 +187,7 @@ interface GameLevel {
 	isBad: boolean;
 	place: PLACES;
 	getItems: ITEMS_ID[];
+	repeatable: boolean;
 	requirement: {
 		level: number[];
 		command: string[];
@@ -198,10 +199,11 @@ interface GameLevel {
 const levels: GameLevel[] = [
 	{
 		number: 1.001,
-	unlocked: 0,
-	getItems: [],
+		unlocked: 0,
+		getItems: [],
 		isBad: false,
 		place: PLACES.tutorial,
+		repeatable: true,
 		requirement: {
 			level: [1],
 			command: [],
@@ -215,6 +217,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.tutorial,
+		repeatable: true,
 		requirement: {
 			level: [0],
 			command: [],
@@ -228,6 +231,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.outsideOfBuilding,
+		repeatable: true,
 		requirement: {
 			level: [1],
 			command: [],
@@ -241,6 +245,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.building,
+		repeatable: true,
 		requirement: {
 			level: [2, 3],
 			command: [VERB_TYPES.travelTo, 'building'],
@@ -264,6 +269,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.building,
+		repeatable: true,
 		requirement: {
 			level: [2],
 			command: [],
@@ -277,6 +283,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
+		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [VERB_TYPES.travelTo, 'room'],
@@ -290,6 +297,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: true,
 		place: PLACES.room,
+		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [VERB_TYPES.examine, 'Alan Bennet'], // eyes alan
@@ -303,6 +311,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
+		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [],
@@ -316,6 +325,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
+		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [VERB_TYPES.examine, 'room'], // inside room
@@ -329,6 +339,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
+		repeatable: true,
 		requirement: {
 			level: [3, 4],
 			command: [VERB_TYPES.travelTo, 'office'],
@@ -342,6 +353,7 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.office,
+		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [],
@@ -355,6 +367,7 @@ const levels: GameLevel[] = [
 	getItems: [ITEMS_ID.cold_key],
 		isBad: false,
 		place: undefined,
+		repeatable: true,
 		requirement: {
 			level: [],
 			command: [VERB_TYPES.think, 'cold'],
@@ -368,6 +381,7 @@ const levels: GameLevel[] = [
 	getItems: [ITEMS_ID.limbo_key],
 		isBad: false,
 		place: undefined,
+		repeatable: true,
 		requirement: {
 			level: [],
 			command: [VERB_TYPES.think, 'limbo'],
