@@ -73,7 +73,8 @@ export class GameProgressionService {
 					if (
 						(levels[i].requirement.level.length === 0 || levels[i].requirement.level.findIndex(lvl => lvl === (this.currentLevel - this.currentLevel % 1)) >= 0) &&
 						(levels[i].requirement.place.length === 0 || levels[i].requirement.place.findIndex(place => place === this.currentLocation) >= 0) &&
-						levels[i].requirement.command.length > 0 &&
+            (!levels[i].requirement.sublevel || levels[1].requirement.sublevel === this.currentLevel) &&
+            levels[i].requirement.command.length > 0 &&
 						levels[i].requirement.command[0] === wordCommand[0].properties.type &&
 						levels[i].requirement.command[1] === wordCommand[1].string
 						// Do the items checking
@@ -157,7 +158,7 @@ export class GameProgressionService {
 
 	isUnlocked(n: number): number {
 		const unlockedLevel = levels.find(lvl => lvl.number === n && lvl.unlocked !== 0);
-		return unlockedLevel && unlockedLevel.repeatable ? unlockedLevel.unlocked : 0;
+		return unlockedLevel ? unlockedLevel.unlocked : 0;
 	}
 
 	getSanityScore(): Observable<number> {
@@ -182,14 +183,14 @@ export enum PLACES {
 }
 
 interface GameLevel {
-	number: number;
+  number: number;
 	unlocked: number;
 	isBad: boolean;
 	place: PLACES;
 	getItems: ITEMS_ID[];
-	repeatable: boolean;
 	requirement: {
-		level: number[];
+    level: number[];
+    sublevel?: number;
 		command: string[];
 		items: ITEMS_ID[];
 		place: PLACES[]
@@ -203,7 +204,6 @@ const levels: GameLevel[] = [
 		getItems: [],
 		isBad: false,
 		place: PLACES.tutorial,
-		repeatable: true,
 		requirement: {
 			level: [1],
 			command: [],
@@ -217,7 +217,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.tutorial,
-		repeatable: true,
 		requirement: {
 			level: [0],
 			command: [],
@@ -231,7 +230,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.outsideOfBuilding,
-		repeatable: true,
 		requirement: {
 			level: [1],
 			command: [],
@@ -245,7 +243,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.building,
-		repeatable: true,
 		requirement: {
 			level: [2, 3],
 			command: [VERB_TYPES.travelTo, 'building'],
@@ -269,7 +266,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.building,
-		repeatable: true,
 		requirement: {
 			level: [2],
 			command: [],
@@ -283,7 +279,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
-		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [VERB_TYPES.travelTo, 'room'],
@@ -297,7 +292,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: true,
 		place: PLACES.room,
-		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [VERB_TYPES.examine, 'Alan Bennet'], // eyes alan
@@ -311,7 +305,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
-		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [],
@@ -325,7 +318,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
-		repeatable: true,
 		requirement: {
 			level: [3],
 			command: [VERB_TYPES.examine, 'room'], // inside room
@@ -339,7 +331,6 @@ const levels: GameLevel[] = [
 	getItems: [],
 		isBad: false,
 		place: PLACES.room,
-		repeatable: true,
 		requirement: {
 			level: [3, 4],
 			command: [VERB_TYPES.travelTo, 'office'],
@@ -352,10 +343,62 @@ const levels: GameLevel[] = [
 	unlocked: 0,
 	getItems: [],
 		isBad: false,
-		place: PLACES.office,
-		repeatable: true,
+		place: PLACES.building,
 		requirement: {
 			level: [3],
+			command: [],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
+		number: 4.1,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+			level: [3],
+			command: [],
+			items: [],
+			place: [PLACES.building]
+		}
+  },
+  {
+		number: 4.2,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+			level: [3],
+			command: [VERB_TYPES.examine, 'Blake Caulfield'],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
+		number: 4.3,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.office,
+		requirement: {
+			level: [3],
+			command: [VERB_TYPES.examine, 'Blake Caulfield'],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
+		number: 4.4,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.office,
+		requirement: {
+      level: [3],
+      sublevel: 4.2,
 			command: [],
 			items: [],
 			place: [PLACES.room]
@@ -367,7 +410,6 @@ const levels: GameLevel[] = [
 	getItems: [ITEMS_ID.cold_key],
 		isBad: false,
 		place: undefined,
-		repeatable: true,
 		requirement: {
 			level: [],
 			command: [VERB_TYPES.think, 'cold'],
@@ -381,7 +423,6 @@ const levels: GameLevel[] = [
 	getItems: [ITEMS_ID.limbo_key],
 		isBad: false,
 		place: undefined,
-		repeatable: true,
 		requirement: {
 			level: [],
 			command: [VERB_TYPES.think, 'limbo'],

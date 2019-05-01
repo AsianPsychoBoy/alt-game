@@ -51,7 +51,7 @@
 			<a class="black-link" (click)="gotoLevel(1.001)"></a> means ⠀⠀⠀⠀⠀⠀⠀<span class="scary glitch" *ngIf="gps.isUnlocked(1.001)">curiosity killed the cat</span><br/>
 		</p>
 
-		<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(2)">continue</button>
+		<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(2)">It hurts to think, but when you see me, it means you are alright now. The gates are open, you can enter and exit all you want.</button>
 	</app-text-screen>
 
 	<app-text-screen @textAppear *ngSwitchCase="2" (heightChanged)="scrollToBottom()">
@@ -90,7 +90,7 @@
 
 		<div @textAppear *appTextPiece="gps.isUnlocked(3.2)">
 			<p>
-				Apart from me and Alan, the room is also inabited by a living, pulsing silence.
+				Apart from me and Alan, the room was also inabited by a living, pulsing silence.
 			</p>
 		</div>
 
@@ -108,47 +108,86 @@
 
 		<div @textAppear *appTextPiece="gps.isUnlocked(3.3)">
 			<p>
-				 ran back to my office to get my blanket and wrapped it tightly around myself. Then I poured myself a cup of hot coffee and drank it in three big gulps, burning my tongue. After I warmed up for a little bit, I read the rest of his document. On the night March 14th, Alan attempt suicide by jumping off of his 4-story apartment building when his mother was away buying groceries. Almost immediately a passerby saw the boy and called an ambulance. Doctors rushed him inside of an operation room, and fortunately, he survived. Unfortunately, the double failure of suicide and of modern medical technologies has led him to a place without answers and resolution, trapped inside of a <span appHyperlink	wordProperties="noun special">limbo</span>, half living, half dead.
-			</p>
+				 ran back to my office to get my blanket and wrapped it tightly around myself. Then I poured myself a cup of hot coffee and drank it in three big gulps, burning my tongue. After I warmed up for a little bit, I read the rest of his document. On the night March 14th, Alan attempt suicide by jumping off of his 4-story apartment building when his mother was away buying groceries. Almost immediately a passerby saw the boy and called an ambulance. Doctors rushed him inside of an operation room, and fortunately, he survived. Unfortunately, the double failure of suicide and of modern medical technologies has led him to a place without answers and resolution, trapped inside of a <span appHyperlink	wordProperties="noun special">limbo</span>, half living, half dead. I realized it was time to swap Alan's IV bag.
+      </p>
 
-			<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(4)">I have no mouth, and I must scream.</button>
-		</div>
+    </div>
+
+    <div @textAppear *appTextPiece="gps.isUnlocked(3.4)">
+      <p>
+        This afternoon, Alan's door is locked tight. I heard voices of a few doctors in a heated debate:
+        "No, no, no
+      </p>
+
+      <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(4)">I have no mouth, and I must scream.</button>
+    </div>
 	</app-text-screen>
 
 	<app-text-screen @textAppear *ngSwitchCase="4" (heightChanged)="scrollToBottom()">
 		<p class="lead">2018/3/17 Chicago, outside of Alan's room</p>
 		<p>
-			I might have thrown around some bull last night but this morning I have gained back my senses. I have not forgotten my nurse training, so as long as I treated Alan like a textbook model, the banality of work would wash out my curiosity. Over<span appHyperlink wordProperties="verb think">think</span>ing was never my thing anyways. When the kid was rolled into the hospital on a bed there was no one around, no crying parents clutching his white sheets, no
+			I might have thrown around some bull last night but this morning I have gained back my senses. I have not forgotten my nurse training, so as long as I treated Alan like a textbook model, the banality of work would wash out my curiosity. Over<span appHyperlink wordProperties="verb think">think</span>ing was never my thing anyways. When the kid was rolled into the hospital on a bed there was no one around, no crying parents clutching his white sheets, no friends running after him, no one. Though it might change today.
 		</p>
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.1)">
 			<p>
-				Alan's first visitor is a young college student named Blake Caulfield. He walked into the room with sharp steps and a penetrative look that made me retreat aside. We exchanged a brief greeting, and then he sat down silently on a chair beside the bed.
+				Alan's first visitor is a young college student named <span appHyperlink wordProperties="noun person">Blake Caulfield</span>. He walked into the room with sharp steps and a penetrative look that made me retreat aside. We exchanged a brief greeting, and then he sat down silently on a chair beside the bed.
 			</p>
 		</div>
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.2)">
 			<p>
-				His body is shaped like a few bold, black brush strokes, and his eyes reflected the world in a way that gives it his own shape and color.
-			</p>
-		</div>
-		<div @textAppear *appTextPiece="gps.isUnlocked(4.2)">
-			<p>
-				"Alan, I don't know if you can hear this, but I'm sorry for everything. What happened to Charlette, and what happened to you. Everything…is broken now, and there is no way to fix it." The life support beeped on in its own rhythmical language.
+				Dressed in jacket and jeans, his body is shaped like a few bold, black brush strokes, and his eyes reflected the world in a way that gives it his own shape and color.
 			</p>
 		</div>
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.3)">
 			<p>
-				The room fell silent again. Blake's eye never moved from Alan. The translucent blackness off his eyes casts a net over Alan's lifeless body. Alan's reflection now lives Blake's eyes, as if his soul might be preserved in that dark lake of tears. I felt the need for space between the two, maybe its better to walk out of the room.
+        "Alan, I don't know if you can hear this, but I'm sorry for everything. What happened to Charlette, and what happened to you. Everything…is broken now, and there is no way to fix it." The life support beeped on in its own rhythmical language. </br>
+
+        The room fell silent again. Blake's eye never moved from Alan. The translucent blackness off his eyes casts a net over Alan's lifeless body. Alan's reflection now lives Blake's eyes, as if his soul might be preserved in that dark lake of tears. I felt the need for space between the two, maybe its better to walk out of the room.
 			</p>
 		</div>
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.4)">
 			<p>
-				"Remember Charlotte?" Blake muttered, as I quietly closed the sliding the doors to the room. I felt like I was sealing away an unspeakable secret--though I have no part in it.
 
-				Half an hour later I came back. Blake has left the room, but to my curiosity he left behind his backpack. I expected him to be back shortly, but he never was.
-
-				<button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(5)"></button>
 			</p>
 		</div>
+		<div @textAppear *appTextPiece="gps.isUnlocked(4.5)">
+			<p>
+				"Remember Charlotte?" Blake muttered, as I quietly closed the sliding the doors to the room behind me. I felt like I was sealing away an unspeakable secret--though I have no part in it.
+
+				Half an hour later I came back. Blake has left the room, but to my curiosity he left behind his backpack, which is pack to the brim of something. I expected him to be back shortly, but he never was. I waited until midnight, yet no one has come to pick up that heavy backpack. Where could he be? The lights suddenly went out in the hallway.
+			</p>
+    </div>
+    <div @textAppear *appTextPiece="gps.isUnlocked(4.6)">
+      <p>
+        Apart from me and Alan, the room was also inabited by a living, pulsing silence.
+      </p>
+    </div>
+
+    <div @textAppear *appTextPiece="gps.isUnlocked(4.7)">
+      <p>
+        It's late at night so the hallways are all cleared up. Many sleeping bodies lied in the two rows of patient rooms on either side. Occasionally a faint white light is turned on in the hallway, revealing nothing but moving shadows. Such a <span appHyperlink wordProperties="noun person">shadow</span> limped in front of me, a few doors down the hallway, looking either drowsy or drunk.
+      </p>
+    </div>
+
+    <div @textAppear *appTextPiece="gps.isUnlocked(4.8)">
+      <p>
+        When I walked closer to that shadow, it collapsed onto the ground under a green exit light by the stairs. I thought it was some careless patient, and ran to him. When I saw his face, I realized he was the Blake I met earlier. I shined a flashlight over him, but before I could check his vitals, I found myself looking at Blake's glassy black eyes that were wide open, pupils dialated as if deperately trying to see something. He heaved coasely, and his hair is covered in sweat even though his body is completely irresponsive. The muscles on his face started to knot up and his mouth opened up as his lips were pulled apart and exposed the teeth underneath, forming a deranged smile, or a sawing scream. There were no sounds coming out of that jagged hole on his face where his mouth used to lie, but I my auditory nerves were bombarded by signals from my own brain. It sounded like metal grinding on flesh.</br>
+        I need to get away.
+      </p>
+    </div>
+
+    <div @textAppear *appTextPiece="gps.isUnlocked(4.9)">
+      <p>
+
+      </p>
+    </div>
+
+    <div @textAppear *appTextPiece="gps.isUnlocked(4.11)">
+      <p>
+        Inside the backpack were compartments filled with camera equipments: six of seven different lenses, a couple of flashes, many spare camera batteries, SD cards, and a Nikon D3500.
+        <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(5)">Open the Camera</button>
+      </p>
+    </div>
 	</app-text-screen>
 
 	<div @textAppear *ngSwitchCase="5" (heightChanged)="scrollToBottom()">
