@@ -26,7 +26,7 @@
 	<app-text-screen *ngSwitchCase="0" class="title-screen">
 
 		<h1 class="display-3">
-			The Gates of Limbo
+      The Gates of Limbo
 		</h1>
 		<h2>
 			An Interactive Fiction by Jack Cai
@@ -46,7 +46,7 @@
 			Click on <span class="linkable-word">words</span> to collect them (max 9)<br/>
 			Use <span class="linkable-word">words</span> to build actions<br/>
 			Certain actions will consume sanity<br/>
-			Certain actions will consume curiosity<br/>
+			<!-- Certain actions will consume curiosity<br/> -->
 			Buttons means progress<br/>
 			<a class="black-link" (click)="gotoLevel(1.001)"></a> means ⠀⠀⠀⠀⠀⠀⠀<span class="scary glitch" *ngIf="gps.isUnlocked(1.001)">curiosity killed the cat</span><br/>
 		</p>

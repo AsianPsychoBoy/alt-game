@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Word, VERB_TYPES, PART_OF_SPEECH, NOUN_TYPES } from '../common/Word';
 import { Observable, Subject } from 'rxjs';
+import { ITEMS_ID, Item } from '../common/Item';
 
 @Injectable()
 export class GameProgressionService {
@@ -14,7 +15,7 @@ export class GameProgressionService {
 	curiosityScore$ = new Subject<number>();
 
 	currentCommand: Word[];
-	currentItems: ITEMS[] = [];
+	currentItems: Item[] = [];
 	currentLocation: PLACES = PLACES.title;
 	previousLocation: PLACES;
 
@@ -86,15 +87,16 @@ export class GameProgressionService {
 			}
 
 			if (matchedIndex) {
-				const newLevel = Object.assign(levels[matchedIndex], levelOverwrite);
+				const newLevel = Object.assign({}, levels[matchedIndex], levelOverwrite);
 				this.currentLevel = newLevel.number;
 				this.currentLevelIndex = matchedIndex;
-				newLevel.unlocked++;
+				levels[matchedIndex].unlocked++;
 				for (let i = 0; i < newLevel.getItems.length; i++) {
-					if (!this.currentItems.includes(newLevel.getItems[i])) {
-						this.currentItems.push(newLevel.getItems[i]);
+					if (!this.currentItems.map(i => i.id).includes(newLevel.getItems[i])) {
+            this.currentItems.push(new Item(newLevel.getItems[i]));
+            // right now eahch item can only appear once
 					}
-				}
+        }
 				if (isBad) {
 					this.sanityScore -= 33;
 					this.sanityScore$.next(this.sanityScore);
@@ -179,21 +181,16 @@ export enum PLACES {
 	office
 }
 
-enum ITEMS {
-	cold_key,
-	limbo_key
-}
-
 interface GameLevel {
 	number: number;
 	unlocked: number;
 	isBad: boolean;
 	place: PLACES;
-	getItems: ITEMS[];
+	getItems: ITEMS_ID[];
 	requirement: {
 		level: number[];
 		command: string[];
-		items: ITEMS[];
+		items: ITEMS_ID[];
 		place: PLACES[]
 	};
 }
@@ -355,7 +352,7 @@ const levels: GameLevel[] = [
 	{
 	number: 0.1,
 	unlocked: 0,
-	getItems: [ITEMS.cold_key],
+	getItems: [ITEMS_ID.cold_key],
 		isBad: false,
 		place: undefined,
 		requirement: {
@@ -368,7 +365,7 @@ const levels: GameLevel[] = [
 	{
 	number: 0.2,
 	unlocked: 0,
-	getItems: [ITEMS.limbo_key],
+	getItems: [ITEMS_ID.limbo_key],
 		isBad: false,
 		place: undefined,
 		requirement: {
@@ -386,4 +383,3 @@ enum ERR_MSG_TYPES {
 	cannotSee,
 	cannotThink
 }
-
