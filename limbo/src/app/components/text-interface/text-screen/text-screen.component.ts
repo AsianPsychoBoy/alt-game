@@ -71,4 +71,10 @@ export class TextScreenComponent implements AfterViewInit {
 		})
 	}
 
+	gotoLevel(n: number) {
+		this.gps.gotoLevel(n).subscribe(
+			success => {}
+		);
+		}
+
 }

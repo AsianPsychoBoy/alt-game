@@ -73,7 +73,7 @@ export class GameProgressionService {
 					if (
 						(levels[i].requirement.level.length === 0 || levels[i].requirement.level.findIndex(lvl => lvl === (this.currentLevel - this.currentLevel % 1)) >= 0) &&
 						(levels[i].requirement.place.length === 0 || levels[i].requirement.place.findIndex(place => place === this.currentLocation) >= 0) &&
-            (!levels[i].requirement.sublevel || levels[1].requirement.sublevel === this.currentLevel) &&
+            (!levels[i].requirement.sublevel || levels[i].requirement.sublevel === this.currentLevel) &&
             levels[i].requirement.command.length > 0 &&
 						levels[i].requirement.command[0] === wordCommand[0].properties.type &&
 						levels[i].requirement.command[1] === wordCommand[1].string
@@ -135,6 +135,7 @@ export class GameProgressionService {
 	}
 
 	gotoLevel(n: number): Observable<boolean> {
+		console.log(n);
 		return new Observable((subscriber) => {
 			const levelIndex = levels.findIndex(lvl => lvl.number === n);
 			console.log(levels[levelIndex]);
@@ -179,7 +180,8 @@ export enum PLACES {
 	outsideOfBuilding,
 	building,
 	room,
-	office
+	office,
+	hallway
 }
 
 interface GameLevel {
@@ -198,6 +200,19 @@ interface GameLevel {
 }
 
 const levels: GameLevel[] = [
+	{
+		number: 0,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.title,
+		requirement: {
+			level: [1],
+			command: [],
+			items: [],
+			place: [PLACES.tutorial]
+		}
+	},
 	{
 		number: 1.001,
 		unlocked: 0,
@@ -330,12 +345,25 @@ const levels: GameLevel[] = [
 	unlocked: 0,
 	getItems: [],
 		isBad: false,
-		place: PLACES.room,
+		place: PLACES.office,
 		requirement: {
-			level: [3, 4],
+			level: [3],
 			command: [VERB_TYPES.travelTo, 'office'],
 			items: [],
-			place: [PLACES.room, PLACES.office],
+			place: [PLACES.room],
+		}
+	},
+	{
+		number: 3.5,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+			level: [3],
+			command: [VERB_TYPES.travelTo, 'room'],
+			items: [],
+			place: [PLACES.office],
 		}
 	},
 	{
@@ -358,8 +386,9 @@ const levels: GameLevel[] = [
 		isBad: false,
 		place: PLACES.room,
 		requirement: {
-			level: [3],
-			command: [],
+			level: [4],
+			sublevel: 4,
+			command: [VERB_TYPES.travelTo, 'room'],
 			items: [],
 			place: [PLACES.building]
 		}
@@ -371,7 +400,8 @@ const levels: GameLevel[] = [
 		isBad: false,
 		place: PLACES.room,
 		requirement: {
-			level: [3],
+			level: [4],
+			sublevel: 4.1,
 			command: [VERB_TYPES.examine, 'Blake Caulfield'],
 			items: [],
 			place: [PLACES.room]
@@ -382,26 +412,92 @@ const levels: GameLevel[] = [
 	unlocked: 0,
 	getItems: [],
 		isBad: false,
-		place: PLACES.office,
+		place: PLACES.room,
 		requirement: {
-			level: [3],
+			level: [4],
+			sublevel: 4.2,
 			command: [VERB_TYPES.examine, 'Blake Caulfield'],
 			items: [],
 			place: [PLACES.room]
 		}
   },
   {
-		number: 4.4,
-	unlocked: 0,
-	getItems: [],
+		number: 4.5,
+		unlocked: 0,
+		getItems: [],
 		isBad: false,
-		place: PLACES.office,
+		place: PLACES.room,
 		requirement: {
-      level: [3],
-      sublevel: 4.2,
-			command: [],
+      	level: [4],
+			command: [VERB_TYPES.travelTo, 'building'],
 			items: [],
 			place: [PLACES.room]
+		}
+	},
+	{
+		number: 4.6,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+			level: [4],
+			command: [VERB_TYPES.examine, 'room'],
+			items: [],
+			place: [PLACES.room]
+		}
+	},
+	{
+		number: 4.7,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.hallway,
+		requirement: {
+      	level: [4],
+			command: [VERB_TYPES.travelTo, 'hallway'],
+			items: [],
+			place: [PLACES.room]
+		}
+	},
+	{
+		number: 4.8,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.hallway,
+		requirement: {
+		  level: [4],
+		  sublevel: 4.7,
+			command: [VERB_TYPES.examine, 'shadow'],
+			items: [],
+			place: [PLACES.hallway]
+		}
+	},
+	{
+		number: 4.801,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.hallway,
+		requirement: {
+			level: [4],
+			command: [],
+			items: [],
+			place: [PLACES.hallway]
+		}
+	},
+	{
+		number: 4.4,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+      	level: [4],
+			command: [VERB_TYPES.travelTo, 'room'],
+			items: [],
+			place: [PLACES.hallway]
 		}
 	},
 	{
@@ -426,6 +522,19 @@ const levels: GameLevel[] = [
 		requirement: {
 			level: [],
 			command: [VERB_TYPES.think, 'limbo'],
+			items: [],
+			place: []
+		}
+	},
+	{
+	number: 0.3,
+	unlocked: 0,
+	getItems: [ITEMS_ID.exit_key],
+		isBad: false,
+		place: undefined,
+		requirement: {
+			level: [],
+			command: [VERB_TYPES.think, 'exit'],
 			items: [],
 			place: []
 		}

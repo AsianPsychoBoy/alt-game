@@ -25,23 +25,8 @@
 	}
 }
 
-.next-button {
-	font-size: 1.5rem;
-	position: relative;
-	top: 0;
-	display: block;
-	border-radius: 0;
-	border: 2px solid#212529;
-	box-shadow: 0 6px 0#212529;
-	margin-bottom: 20px;
-	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-	&:active {
-		top: 6px;
-		box-shadow: 0 0 0#212529;
-	}
-}
-
 .scary {
+	width: 100%;
 	background-color:black;
 	color: white;
 	position: absolute;

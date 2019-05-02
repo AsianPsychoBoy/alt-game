@@ -13,7 +13,8 @@ export class Item {
 
 export enum ITEMS_ID {
 	cold_key,
-	limbo_key
+	limbo_key,
+	exit_key
 }
 
 export enum ITEMS_TYPE {
@@ -30,5 +31,10 @@ const allItems = [
     id: ITEMS_ID.limbo_key,
     name: 'Limbo',
     type: ITEMS_TYPE.goalWords
+  },
+  {
+	  id: ITEMS_ID.exit_key,
+	  name: 'exit',
+	  type: ITEMS_TYPE.goalWords
   }
 ]
