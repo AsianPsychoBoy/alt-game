@@ -34,7 +34,7 @@ export class TextScreenComponent implements AfterViewInit {
 
 	@Output() heightChanged = new EventEmitter<boolean>();
 
-	constructor(public viewContainer: ViewContainerRef, private gps: GameProgressionService, private renderer2: Renderer2) { }
+	constructor(public viewContainer: ViewContainerRef, public gps: GameProgressionService, private renderer2: Renderer2) { }
 
 	ngAfterViewInit() {
 		this.createViewSubscription = merge(
