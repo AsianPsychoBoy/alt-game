@@ -1,0 +1,13 @@
+.container {
+  height: 56vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+  .item-space {
+		font-family: 'Source Code Pro', monospace;
+  }
+  .item-check {
+    margin: 4rem 0;
+  }
+}

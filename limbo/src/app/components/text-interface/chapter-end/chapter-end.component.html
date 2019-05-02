@@ -1,10 +1,13 @@
-<div class="circle">
-  <h2 class="display-3">BRAIN ACTIVITY INTERFACE</h2>
-  <h2 class="display-4">Activity features mismatch</h2>
+<div class="container">
+  <h2 class="display-4 text-center">NIKON BRAIN ACTIVITY INTERFACE</h2>
 	<!-- <div class="circle-item" *ngFor="let item of gps.currentItems">
 
   </div> -->
-  <p>Think about the thing you fear.</p>
-  <p>Think about the place you want to escape from.</p>
-  <p>Think about the place you could never reach.</p>
+  <div class="item-check">
+    <p class="item-space">Think about the thing you fear-------------------------{{ findItem('cold_key') }}</p>
+    <p class="item-space">Think about the place you want to escape from----------{{ findItem('limbo_key') }}</p>
+    <p class="item-space">Think about the place you could never reach------------{{ findItem('exit_key') }}</p>
+  </div>
+
+  <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(7)">Access</button>
 </div>

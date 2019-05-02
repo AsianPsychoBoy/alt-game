@@ -48,9 +48,10 @@
 			Certain actions will consume sanity<br/>
 			<!-- Certain actions will consume curiosity<br/> -->
 			Buttons means progress<br/>
-			<a class="black-link" (click)="gotoLevel(1.001)"></a> means ⠀⠀⠀⠀⠀⠀⠀<span class="scary glitch" *ngIf="gps.isUnlocked(1.001)">curiosity killed the cat</span><br/>
-		</p>
-		
+      <a class="black-link" (click)="gotoLevel(1.001)"></a> means ⠀⠀⠀⠀⠀⠀⠀
+    </p>
+    <p class="scary glitch" *ngIf="gps.isUnlocked(1.001)">curiosity killed the cat</p>
+
 		<p>
 			It hurts to think, but when you see me, it means you are alright now. The gates are open, you can <button class="btn btn-lg mx-auto next-button d-inline" (click)="gotoLevel(2)">enter</button> and <button class="btn btn-lg mx-auto next-button d-inline" (click)="gotoLevel(0)">exit</button> all you want.
 		</p>
@@ -118,7 +119,7 @@
     <div @textAppear *appTextPiece="gps.isUnlocked(3.5)">
       <p>
         This afternoon, Alan's door is locked tight. I heard voices of a few doctors in a heated debate:
-		"No, no, no, I have never had a single patient that showed signs of conciousness." 
+		"No, no, no, I have never had a single patient that showed signs of conciousness."
 		"But his brain scan says he might just on the borderline. A person in permanent coma does not show this much brian activity!"
 		"You know what, let just say he's having a little dream, what are we supposed to do? Wake him up?"
       </p>
@@ -134,33 +135,33 @@
 		</p>
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.1)">
 			<p>
-				Alan's first visitor is a young college student named <span appHyperlink wordProperties="noun person">Blake Caulfield</span>. He walked into the room with sharp steps and a penetrative look that made me retreat aside. We exchanged a brief greeting, and then he sat down silently on a chair beside the bed.
+				Alan's first visitor is a young college student named <span appHyperlink wordProperties="noun person">Blake Caulfield</span>. He walked into the room with sharp steps and a penetrative <span appHyperlink wordProperties="verb examine">look</span> that made me retreat aside. We exchanged a brief greeting, and then he sat down silently on a chair beside the bed.
 			</p>
 		</div>
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.2)">
 			<p>
-				Dressed in jacket and jeans, his body is shaped like a few bold, black brush strokes, and his eyes reflected the world in a way that gives it his own shape and color.
+				Dressed in jacket and jeans, his body is shaped like a few bold, black brush strokes, and his eyes reflected the world in a way that gives it his own shape and color. He muttered something to the body.
 			</p>
 		</div>
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.3)">
 			<p>
-				"Alan, I don't know if you can hear this, but I'm sorry for everything. What happened to Charlette, and what happened to you. Everything…is broken now, and there is no way to fix it." The life support beeped on in its own rhythmical language.
+				"Alan, I don't know if you can ever hear this, but I'm sorry for everything. What happened to Charlette, and what happened to you. Everything…is broken now, and there is no way to fix it." The life support beeped on in its own rhythmical language.
 			</p>
 			<p>
-				The room fell silent again. Blake's eye never moved from Alan. The translucent blackness off his eyes casts a net over Alan's lifeless body. Alan's reflection now lives Blake's eyes, as if his soul might be preserved in that dark lake of tears. I felt the need for space between the two, maybe its better to walk out of the room and take a break somewhere else in the building.
+				The room fell silent again. Blake's eye never moved from Alan. The translucent blackness off his eyes casts a net over Alan's lifeless body. Alan's reflection now lives inside of Blake's eyes, as if his soul might be preserved in that dark lake of tears. I felt the need for space between the two, maybe its better to walk out of the room and take a break in the <span appHyperlink wordProperties="noun place">hallway</span>.
 			</p>
 		</div>
-		<div @textAppear *appTextPiece="gps.isUnlocked(4.4)">
+		<!-- <div @textAppear *appTextPiece="gps.isUnlocked(4.4)">
 			<p>
-				I don't know anywhere else to go so I went back into Alan's room. I have nothing else to look at so I stared at Blake's backpack. 
+				I don't know anywhere else to go so I went back into Alan's room. I have nothing else to look at so I stared at Blake's backpack.
 			</p>
-		</div>
+		</div> -->
 		<div @textAppear *appTextPiece="gps.isUnlocked(4.5)">
 			<p>
 				"Remember Charlotte?" Blake muttered, as I quietly closed the sliding the doors to the room behind me. I felt like I was sealing away an unspeakable secret--though I have no part in it.
 			</p>
 			<p>
-				Half an hour later I came back. Blake has left the room, but to my curiosity he left behind his backpack, which is pack to the brim of something. I expected him to be back shortly, but he never was. I waited until midnight, yet no one has come to pick up that heavy backpack. Where could he be? The lights suddenly went out in the <span appHyperlink wordProperties="noun place">hallway</span>.
+				Half an hour later I came back. Blake has left the room, but to my curiosity he left behind his <span appHyperlink wordProperties="noun object">backpack</span>, which is pack to the brim of something. I expected him to be back shortly, but he never was. I waited until midnight, yet no one has come to pick up that heavy backpack. Where could he be? The lights suddenly went out in the hallway.
 			</p>
     </div>
     <div @textAppear *appTextPiece="gps.isUnlocked(4.6)">
@@ -177,26 +178,44 @@
 
     <div @textAppear *appTextPiece="gps.isUnlocked(4.8)">
 		<p>
-			When I walked closer to that shadow, it collapsed onto the ground under a green <span appHyperlink wordProperties="noun object">exit</span> light by the stairs. I thought it was some careless patient, i'd better go check on him. When I saw his face, I realized he was the Blake I met earlier. I shined a flashlight over him, but before I could check his vitals, I found myself looking at <a class="black-link" (click)="gotoLevel(4.801)"></a>
+			When I walked closer to that shadow, it collapsed onto the ground under a green <span appHyperlink wordProperties="noun special">exit</span> light by the stairs. I thought it was some careless patient, better go check on him. When I saw his face, I realized he was the Blake I met earlier. I shined a flashlight over him, but before I could check his vitals, I found myself looking at <a class="black-link" (click)="gotoLevel(4.801)"></a>
 		</p>
 		<ng-container *ngIf="gps.isUnlocked(4.801)">
 			<p class="scary glitch">
-				Blake's glassy black eyes that were wide <span appHyperlink wordProperties="noun object">open</span>, pupils dialated as if deperately trying to see something. He heaved coasely, and his hair is covered in sweat even though his body is completely irresponsive. The muscles on his face started to knot up and his mouth opened up as his lips were pulled apart and exposed the teeth underneath, forming a deranged smile, or a sawing scream. There were no sounds coming out of that jagged hole on his face where his mouth used to lie, but I my auditory nerves were bombarded by signals from my own brain. It sounded like metal grinding on flesh.<br/>
+				Blake's glassy black eyes were wide <span appHyperlink wordProperties="verb interact">open</span>, pupils dialated as if deperately trying to see something. He heaved coasely, and his hair is covered in sweat even though his body is completely irresponsive. The muscles on his face started to knot up and his mouth opened up as his lips were pulled apart and exposed the teeth underneath, forming a deranged smile, or a sawing scream. There were no sounds coming out of that jagged hole on his face where his mouth used to lie, but my auditory nerves were bombarded by signals from my own brain. His laugh sounded like metal grinding on flesh.<br/>
 			</p>
 		</ng-container>
-		<p>I need to get away.</p>
+		<p>
+      My legs trembled. I sprinted back where I came from, into Alan's room, and closed the door behind me. What was happening to Blake? What was happening to me?
+      <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(5)">I want to go home</button>
+    </p>
     </div>
+  </app-text-screen>
 
-    <div @textAppear *appTextPiece="gps.isUnlocked(4.9)">
+  <app-text-screen @textAppear *ngSwitchCase="5" (heightChanged)="scrollToBottom()">
+      <p class="lead">2018/3/17 Chicago, Inside my office</p>
       <p>
-		Inside the backpack were compartments filled with camera equipments: six of seven different lenses, a couple of flashes, many spare camera batteries, SD cards, and a Nikon D3500.
-
-        <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(5)">Open the Camera</button>
+        Persistent vegetative state. The exact same condition sent Blake into a room on the same floor, not far from Alan's. I saw him on the hospital bed earlier, perfectly inanimate but still not enough to clear up the image of his empty eyes and jeering face I saw from last night. Something must have happened between his visit with Alan and his collapse in that hallway.
       </p>
-    </div>
-	</app-text-screen>
+      <div @textAppear *appTextPiece="gps.isUnlocked(5.1)">
+        <p>
+          I walk a familiar path to Alan's room. Blake's backpack is still sitting on the chair by the machines recording his vitals.
+        </p>
+      </div>
+      <div @textAppear *appTextPiece="gps.isUnlocked(5.3)">
+        <p>
+          Inside the backpack were shock-proof compartments filled with camera equipments: six of seven different lenses, a couple of flashes, many spare camera batteries, SD cards, and a Nikon D3500.
 
-	<div @textAppear *ngSwitchCase="5" (heightChanged)="scrollToBottom()">
+          <button class="btn btn-lg mx-auto next-button" (click)="gotoLevel(6)">Open the Camera</button>
+        </p>
+      </div>
+  </app-text-screen>
+
+	<div @textAppear *ngSwitchCase="6" (heightChanged)="scrollToBottom()">
 		<app-chapter-end></app-chapter-end>
-	</div>
+  </div>
+
+  <div @textAppear *ngSwitchCase="7" (heightChanged)="scrollToBottom()">
+    <p>You have reached the end of this demo.</p>
+  </div>
 </div>

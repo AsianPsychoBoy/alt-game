@@ -138,8 +138,7 @@ export class GameProgressionService {
 		console.log(n);
 		return new Observable((subscriber) => {
 			const levelIndex = levels.findIndex(lvl => lvl.number === n);
-			console.log(levels[levelIndex]);
-			if (levelIndex >= 0 && levels[levelIndex].requirement.level[0] === (this.currentLevel - this.currentLevel % 1)) {
+			if (levelIndex >= 0 && typeof levels[levelIndex].requirement.level.find(lvl => lvl === (this.currentLevel - this.currentLevel % 1)) === 'number') {
 				this.currentLevel = levels[levelIndex].number;
 				this.currentLevelIndex = levelIndex;
 				levels[levelIndex].unlocked++;
@@ -147,7 +146,11 @@ export class GameProgressionService {
 					this.previousLocation = this.currentLocation;
 				}
 				this.currentLocation = levels[levelIndex].place;
-				// console.log('goto', levelIndex, n, this.currentLevel);
+        // console.log('goto', levelIndex, n, this.currentLevel);
+        if (levels[levelIndex].isBad) {
+					this.sanityScore -= 33;
+					this.sanityScore$.next(this.sanityScore);
+				}
 				subscriber.next(true);
 				subscriber.complete();
 			} else {
@@ -217,7 +220,7 @@ const levels: GameLevel[] = [
 		number: 1.001,
 		unlocked: 0,
 		getItems: [],
-		isBad: false,
+		isBad: true,
 		place: PLACES.tutorial,
 		requirement: {
 			level: [1],
@@ -233,7 +236,7 @@ const levels: GameLevel[] = [
 		isBad: false,
 		place: PLACES.tutorial,
 		requirement: {
-			level: [0],
+			level: [0, 2],
 			command: [],
 			items: [],
 			place: [PLACES.title]
@@ -246,7 +249,7 @@ const levels: GameLevel[] = [
 		isBad: false,
 		place: PLACES.outsideOfBuilding,
 		requirement: {
-			level: [1],
+			level: [1, 3],
 			command: [],
 			items: [],
 			place: [PLACES.tutorial]
@@ -259,10 +262,10 @@ const levels: GameLevel[] = [
 		isBad: false,
 		place: PLACES.building,
 		requirement: {
-			level: [2, 3],
+			level: [2],
 			command: [VERB_TYPES.travelTo, 'building'],
 			items: [],
-			place: [PLACES.outsideOfBuilding, PLACES.room, PLACES.building]
+			place: [PLACES.outsideOfBuilding]
 		}
 	},
 //	 {
@@ -282,7 +285,7 @@ const levels: GameLevel[] = [
 		isBad: false,
 		place: PLACES.building,
 		requirement: {
-			level: [2],
+			level: [2, 4],
 			command: [],
 			items: [],
 			place: [PLACES.building],
@@ -373,7 +376,7 @@ const levels: GameLevel[] = [
 		isBad: false,
 		place: PLACES.building,
 		requirement: {
-			level: [3],
+			level: [3, 5],
 			command: [],
 			items: [],
 			place: [PLACES.room]
@@ -429,7 +432,7 @@ const levels: GameLevel[] = [
 		place: PLACES.room,
 		requirement: {
       	level: [4],
-			command: [VERB_TYPES.travelTo, 'building'],
+			command: [VERB_TYPES.travelTo, 'hallway'],
 			items: [],
 			place: [PLACES.room]
 		}
@@ -464,7 +467,7 @@ const levels: GameLevel[] = [
 		number: 4.8,
 		unlocked: 0,
 		getItems: [],
-		isBad: false,
+		isBad: true,
 		place: PLACES.hallway,
 		requirement: {
 		  level: [4],
@@ -499,7 +502,72 @@ const levels: GameLevel[] = [
 			items: [],
 			place: [PLACES.hallway]
 		}
-	},
+  },
+  {
+		number: 5,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.office,
+		requirement: {
+      	level: [4, 6],
+			command: [],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
+		number: 5.1,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+      	level: [5],
+			command: [VERB_TYPES.travelTo, 'room'],
+			items: [],
+			place: [PLACES.office]
+		}
+  },
+  {
+		number: 5.3,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+      	level: [5],
+			command: [VERB_TYPES.interact, 'backpack'],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
+		number: 6,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+      	level: [5],
+			command: [],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
+		number: 7,
+		unlocked: 0,
+		getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+      	level: [6],
+			command: [],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
 	{
 	number: 0.1,
 	unlocked: 0,
