@@ -135,7 +135,6 @@ export class GameProgressionService {
 	}
 
 	gotoLevel(n: number): Observable<boolean> {
-		console.log(n);
 		return new Observable((subscriber) => {
 			const levelIndex = levels.findIndex(lvl => lvl.number === n);
 			if (levelIndex >= 0 && typeof levels[levelIndex].requirement.level.find(lvl => lvl === (this.currentLevel - this.currentLevel % 1)) === 'number') {
@@ -150,7 +149,10 @@ export class GameProgressionService {
         if (levels[levelIndex].isBad) {
 					this.sanityScore -= 33;
 					this.sanityScore$.next(this.sanityScore);
-				}
+				} else if (n > this.currentLevel) {
+          this.sanityScore += 15;
+          this.sanityScore$.next(this.sanityScore);
+        }
 				subscriber.next(true);
 				subscriber.complete();
 			} else {
@@ -425,13 +427,40 @@ const levels: GameLevel[] = [
 		}
   },
   {
+		number: 4.31,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+			level: [4],
+			command: [VERB_TYPES.examine, 'Blake Caulfield'],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
+		number: 4.51,
+	unlocked: 0,
+	getItems: [],
+		isBad: false,
+		place: PLACES.room,
+		requirement: {
+			level: [4],
+			command: [VERB_TYPES.examine, 'backpack'],
+			items: [],
+			place: [PLACES.room]
+		}
+  },
+  {
 		number: 4.5,
 		unlocked: 0,
 		getItems: [],
 		isBad: false,
 		place: PLACES.room,
 		requirement: {
-      	level: [4],
+        level: [4],
+        sublevel: 4.3,
 			command: [VERB_TYPES.travelTo, 'hallway'],
 			items: [],
 			place: [PLACES.room]
